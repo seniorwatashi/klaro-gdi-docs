@@ -177,6 +177,22 @@
   .m-crit{margin-top:8px; font-size:13.8px; color:var(--ink-muted); max-width:70ch;}
   .m-crit b{color:var(--ink); font-weight:600;}
 
+  /* ---------- Section 6: entregables ---------- */
+  .deliv-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+  .deliv-card{padding:20px 20px 18px; border-top:4px solid var(--team-color, var(--blue));}
+  .deliv-card h3{font-size:15.5px; display:flex; align-items:center; gap:8px; margin-bottom:14px;}
+  .deliv-phase{margin-top:14px;}
+  .deliv-phase:first-of-type{margin-top:0;}
+  .deliv-phase .lbl{
+    display:inline-block; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--team-color, var(--blue)); margin-bottom:6px;
+  }
+  .deliv-phase ul{margin:0; padding-left:18px; font-size:13.3px; display:flex; flex-direction:column; gap:5px;}
+  .deliv-phase p.note{margin:0; font-size:13.3px; color:var(--ink-muted); font-style:italic;}
+  .deliv-closing{margin-top:18px; padding:18px 20px; border-left:4px solid var(--blue);}
+  .deliv-closing .k{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-muted); font-weight:700;}
+  .deliv-closing p{margin-top:6px; font-size:14px;}
+
   footer{
     max-width:1180px; margin:40px auto 0; padding:24px 24px 0; border-top:1px solid var(--line);
     color:var(--ink-muted); font-size:12.6px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
@@ -225,6 +241,7 @@
     <li><a href="#s3"><span class="n">3</span>Calendario día a día</a></li>
     <li><a href="#s4"><span class="n">4</span>Calendario por persona</a></li>
     <li><a href="#s5"><span class="n">5</span>Milestones</a></li>
+    <li><a href="#s6"><span class="n">6</span>Entregables</a></li>
   </ol>
 </nav>
 
@@ -359,6 +376,110 @@
     <div class="sec-head"><span class="num">5</span><h2>Milestones y criterios de victoria</h2></div>
     <p class="sec-sub">Los reportes de campaña no llevan meta numérica de volumen — el criterio de victoria es entregar información completa y a tiempo.</p>
     <div class="milestones" id="milestones"></div>
+  </section>
+
+  <!-- ================= SECTION 6 ================= -->
+  <section class="doc-section" id="s6">
+    <div class="sec-head"><span class="num">6</span><h2>Resumen de entregables</h2></div>
+    <p class="sec-sub">Qué entrega cada equipo, antes de la campaña, durante la campaña, y al cierre.</p>
+    <div class="deliv-grid">
+      <div class="card deliv-card" style="--team-color:var(--violet)">
+        <h3><span class="dot" style="background:var(--violet)"></span>Flow</h3>
+        <div class="deliv-phase">
+          <span class="lbl">Antes</span>
+          <ul>
+            <li>Agente de IA + base de datos configurados, con los criterios de calificación de GDI aplicados.</li>
+            <li>Brevo y Calendly conectados; guion de WhatsApp construido y aprobado por José.</li>
+            <li>Secuencia de correos configurada técnicamente y flujo probado de punta a punta.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Durante</span>
+          <ul>
+            <li>Leads clasificados y agendados todos los días de la campaña.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Cierre</span>
+          <p class="note">No termina con el Vuelo 2 — continúa un año completo dando el servicio del agente (suscripción anual ya cotizada).</p>
+        </div>
+      </div>
+
+      <div class="card deliv-card" style="--team-color:var(--green)">
+        <h3><span class="dot" style="background:var(--green)"></span>Klaro Diseño</h3>
+        <div class="deliv-phase">
+          <span class="lbl">Antes</span>
+          <ul>
+            <li>8 imágenes, 2 carruseles y 2 videos de pauta (Vuelo 1), aprobados por GDI.</li>
+            <li>15 posts de contenido orgánico general.</li>
+            <li>Plantilla visual de la secuencia de correos.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Durante</span>
+          <ul>
+            <li>Contenido orgánico del Vuelo 2: planificado, producido y entregado.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Cierre</span>
+          <p class="note">Sin entregable propio — su trabajo termina con el contenido del Vuelo 2.</p>
+        </div>
+      </div>
+
+      <div class="card deliv-card" style="--team-color:var(--teal)">
+        <h3><span class="dot" style="background:var(--teal)"></span>Klaro Medios</h3>
+        <div class="deliv-phase">
+          <span class="lbl">Antes</span>
+          <ul>
+            <li>Cuentas de LinkedIn/Meta Ads con permisos + panel de medición.</li>
+            <li>Campaña configurada en borrador (audiencias, presupuestos, eventos de conversión) + esquema de atribución por canal.</li>
+            <li>Journey verificado de punta a punta junto con Flow y GDI.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Durante</span>
+          <ul>
+            <li>Campañas activas desde el lanzamiento.</li>
+            <li>4 reportes semanales con ajustes de segmentación/presupuesto.</li>
+            <li>Reporte corrida 1 (cierre Vuelo 1) + análisis para la revisión intermedia.</li>
+            <li>Relanzamiento del Vuelo 2 con los ajustes acordados; reporte corrida 2 (cierre Vuelo 2).</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Cierre</span>
+          <p class="note">Su último entregable es el reporte corrida 2 — no participa del informe final consolidado (eso lo entrega Klaro a nivel proyecto).</p>
+        </div>
+      </div>
+
+      <div class="card deliv-card" style="--team-color:var(--gold)">
+        <h3><span class="dot" style="background:var(--gold)"></span>GDI</h3>
+        <div class="deliv-phase">
+          <span class="lbl">Antes</span>
+          <ul>
+            <li>Orden de compra firmada y anticipo (60%) en trámite.</li>
+            <li>Criterios de calificación del lead confirmados y entregados a Flow.</li>
+            <li>Guion de WhatsApp aprobado; piezas de pauta aprobadas; agenda comercial lista para recibir leads.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Durante</span>
+          <ul>
+            <li>Leads procesados todos los días: videollamadas, filtro de compliance, documentos, firma y recepción de fondos.</li>
+            <li>Ajustes del Vuelo 2 revisados y aprobados en la revisión intermedia.</li>
+          </ul>
+        </div>
+        <div class="deliv-phase">
+          <span class="lbl">Cierre</span>
+          <p class="note">Pago final liberado (40%, US$3,346.56) contra la entrega del informe final.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card deliv-closing">
+      <span class="k">Klaro — cierre del proyecto</span>
+      <p>Entrega el reporte final con los aprendizajes buscados desde el inicio del proyecto (costo de adquisición por canal + reacción del mercado al producto) al cliente, y entrega todos los deliverables en la reunión de cierre con GDI.</p>
+    </div>
   </section>
 
   <footer>

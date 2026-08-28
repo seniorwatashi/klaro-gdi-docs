@@ -1,0 +1,716 @@
+<title>Capital en Movimiento</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --blue:#4C83E5; --blue-deep:#2E5FC2; --header-bg:#1F4EA0; --green:#6FA83A; --green-bright:#94C750;
+    --teal:#2F8F82; --gold:#B9862E; --violet:#6B5FC4;
+    --bg:#F6F7FA; --surface:#FFFFFF; --surface-2:#EEF1F6; --surface-3:#F1F3F7; --nav-bg:#EEF4E4;
+    --ink:#1E2430; --ink-muted:#5B6472; --line:#E2E5EC; --line-soft:#EBEDF2;
+    --shadow: 0 1px 2px rgba(20,30,60,.06), 0 8px 24px -12px rgba(20,30,60,.16);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:15.5px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Manrope", ui-sans-serif, system-ui, sans-serif; text-wrap:balance; margin:0;}
+  p{margin:0;}
+  ::selection{background:color-mix(in srgb, var(--blue) 30%, transparent);}
+  a{color:var(--blue-deep);}
+  table{border-collapse:collapse;}
+  .tab{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+
+  .page{max-width:1180px; margin:0 auto; padding:0 24px 96px;}
+
+  /* ---------- Header ---------- */
+  .topbar{
+    display:flex; align-items:center; gap:18px;
+    padding:14px 24px;
+    background:var(--header-bg);
+  }
+  .topbar-inner{display:flex; align-items:center; gap:18px; max-width:1180px; margin:0 auto; width:100%;}
+  .topbar svg{height:84px; width:auto; display:block; flex:none;}
+  .topbar svg .wordmark{fill:#FFFFFF;}
+  .topbar .title-block{display:flex; flex-direction:column; gap:3px;}
+  .topbar h1{font-size:24px; font-weight:800; letter-spacing:-.01em; color:#FFFFFF;}
+  .topbar .doc-sub{color:rgba(255,255,255,.82); font-size:13.5px;}
+
+  /* ---------- Nav ---------- */
+  .doc-nav{
+    position:sticky; top:0; z-index:20; background:var(--nav-bg);
+    border-bottom:3px solid var(--blue);
+    box-shadow:0 2px 10px -4px rgba(20,30,60,.12);
+    margin:0 0 40px; padding:0 24px;
+  }
+  .doc-nav ol{
+    max-width:1180px; margin:0 auto; padding:0; list-style:none;
+    display:flex; gap:4px; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .doc-nav ol::-webkit-scrollbar{display:none;}
+  .doc-nav a{
+    display:flex; align-items:center; gap:8px; white-space:nowrap;
+    padding:14px 14px; text-decoration:none; color:var(--ink-muted);
+    font-weight:600; font-size:13.5px; border-bottom:2px solid transparent;
+  }
+  .doc-nav a:hover{color:var(--blue-deep); border-bottom-color:var(--green);}
+  .doc-nav a .n{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; background:var(--surface-2);
+    font-family:"IBM Plex Mono"; font-size:11px; color:var(--blue-deep);
+  }
+
+  section.doc-section{padding:8px 0 64px; scroll-margin-top:64px;}
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:22px;}
+  .sec-head .num{
+    font-family:"IBM Plex Mono"; font-size:14px; font-weight:700; color:#FFFFFF;
+    background:var(--blue); border-radius:8px; padding:4px 10px;
+  }
+  .sec-head h2{font-size:23px; font-weight:800;}
+  .sec-sub{color:var(--ink-muted); margin:-10px 0 26px; max-width:760px; font-size:14.5px;}
+
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);}
+
+  /* ---------- Section 1 ---------- */
+  .obj-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  @media (max-width:860px){.obj-grid{grid-template-columns:1fr;}}
+  .obj-main{padding:26px 28px;}
+  .obj-main h3{font-size:16px; margin-bottom:8px;}
+  .obj-main p + h3{margin-top:20px;}
+  .obj-main p{color:var(--ink); max-width:64ch;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .pill{
+    font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:999px;
+    background:var(--surface-2); color:var(--blue-deep); border:1px solid var(--line);
+  }
+  .side-stack{display:flex; flex-direction:column; gap:16px;}
+  .info-box{padding:18px 20px;}
+  .info-box .k{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-muted); font-weight:700;}
+  .info-box .v{margin-top:6px; font-size:14.5px;}
+  .journey-fig{margin:14px 0 0; color:var(--ink);}
+  .journey-fig svg{display:block; width:100%; height:auto; max-width:640px; margin:0 auto;}
+  .journey-fig figcaption{margin-top:10px; font-size:12.6px; color:var(--ink-muted); text-align:center;}
+  .journey-legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:12px; font-size:12px; color:var(--ink-muted);}
+  .journey-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .journey-legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  /* ---------- Section 2: teams ---------- */
+  .team-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;}
+  .team-card{padding:20px 20px 18px; border-top:4px solid var(--team-color, var(--blue));}
+  .team-card h3{font-size:15.5px; display:flex; align-items:center; gap:8px;}
+  .team-card .members{color:var(--ink-muted); font-size:13px; margin-top:2px;}
+  .team-card ul{margin:14px 0 0; padding-left:18px; font-size:13.6px; display:flex; flex-direction:column; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; background:var(--team-color, var(--blue)); flex:none;}
+
+  /* ---------- Section 3: calendar ---------- */
+  .phase-block{margin-bottom:8px;}
+  .phase-title{
+    display:flex; align-items:center; gap:10px; margin:34px 0 14px;
+    font-family:"Manrope"; font-weight:800; font-size:14px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--phase-color, var(--blue));
+  }
+  .phase-title .line{flex:1; height:1px; background:var(--line);}
+  .day-card{
+    display:grid; grid-template-columns:96px 1fr; gap:16px;
+    padding:16px 18px; border:1px solid var(--line); border-radius:14px;
+    background:var(--surface); margin-bottom:10px;
+  }
+  .day-card.offday{background:var(--surface-3); opacity:.65;}
+  .day-card.milestone{border-color:var(--phase-color, var(--blue)); box-shadow:0 0 0 1px var(--phase-color, var(--blue)) inset;}
+  .day-date{display:flex; flex-direction:column; gap:2px;}
+  .day-date .dow{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-muted); font-weight:700;}
+  .day-date .num{font-family:"IBM Plex Mono"; font-size:20px; font-weight:600;}
+  .day-date .mon{font-size:11px; color:var(--ink-muted);}
+  .day-items{display:flex; flex-direction:column; gap:10px;}
+  .item-row{display:grid; grid-template-columns:170px 1fr; gap:12px;}
+  @media (max-width:640px){.item-row{grid-template-columns:1fr;} .day-card{grid-template-columns:1fr;}}
+  .who-tags{display:flex; flex-wrap:wrap; gap:5px; align-content:flex-start;}
+  .who-tag{
+    display:inline-flex; align-items:center; gap:6px; height:fit-content;
+    font-size:12.5px; font-weight:700; padding:3px 9px; border-radius:7px;
+    background:color-mix(in srgb, var(--who-color, var(--blue)) 16%, var(--surface));
+    color:var(--who-color, var(--blue)); width:fit-content;
+  }
+  .item-text .task{font-size:13.8px;}
+  .item-text .deliv{font-size:12.6px; color:var(--ink-muted); margin-top:3px;}
+  .item-text .deliv b{color:var(--ink); font-weight:600;}
+  .milestone-flag{
+    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700;
+    color:var(--phase-color,var(--blue)); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px;
+  }
+  .offday-label{color:var(--ink-muted); font-size:13px; font-style:italic; align-self:center;}
+
+  /* ---------- Section 4: person filter ---------- */
+  .person-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
+  .p-chip{
+    border:1px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:999px; padding:7px 14px; font-size:13.4px; font-weight:600; cursor:pointer;
+    display:flex; align-items:center; gap:7px;
+  }
+  .p-chip .dot{width:8px; height:8px;}
+  .p-chip[aria-pressed="true"]{background:var(--chip-color, var(--blue)); color:#fff; border-color:transparent;}
+  .p-chip[aria-pressed="true"] .dot{background:#fff;}
+  #person-view{display:flex; flex-direction:column; gap:10px;}
+  .p-row{
+    display:grid; grid-template-columns:100px 1fr; gap:14px;
+    padding:13px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);
+  }
+  .p-row .d{font-family:"IBM Plex Mono"; font-size:13px; color:var(--ink-muted); padding-top:1px;}
+  .p-row .task{font-size:13.8px;}
+  .p-row .deliv{font-size:12.4px; color:var(--ink-muted); margin-top:3px;}
+  .empty-hint{color:var(--ink-muted); font-size:14px; padding:20px 4px;}
+
+  /* ---------- Section 5: milestones ---------- */
+  .milestones{display:flex; flex-direction:column; gap:0; border-left:2px solid var(--line); margin-left:8px; padding-left:26px;}
+  .m-item{position:relative; padding-bottom:30px;}
+  .m-item:last-child{padding-bottom:2px;}
+  .m-item::before{
+    content:""; position:absolute; left:-32px; top:4px; width:13px; height:13px; border-radius:50%;
+    background:var(--surface); border:3px solid var(--m-color, var(--blue));
+  }
+  .m-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .m-date{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--m-color, var(--blue));}
+  .m-title{font-family:"Manrope"; font-weight:800; font-size:16px;}
+  .m-crit{margin-top:8px; font-size:13.8px; color:var(--ink-muted); max-width:70ch;}
+  .m-crit b{color:var(--ink); font-weight:600;}
+
+  footer{
+    max-width:1180px; margin:40px auto 0; padding:24px 24px 0; border-top:1px solid var(--line);
+    color:var(--ink-muted); font-size:12.6px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+
+<header class="topbar">
+ <div class="topbar-inner">
+  <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-label="Klaro Comunicación">
+        <path fill="#94c750" d="M115.36,222.98l23.2,37.25c1.53,2.45,4.17,3.92,7.06,3.92h45.62l-46.84-74.93-29.03,33.77Z"/>
+        <path fill="#4c83e5" d="M91.01,264.14c6.71,0,12.17-5.46,12.17-12.17v-118.81h-42.42v130.98h30.26Z"/>
+        <path fill="#94c750" d="M145.74,133.16c-3.01,0-5.89,1.43-7.71,3.83l-32.81,43.2v51.89l8.01-9.74,76.67-89.16h-44.16Z"/>
+        <g class="wordmark" fill="#606060">
+          <path d="M219.95,169.08h6.12v11.64l9.45-11.68h6.5l-10.7,12.81,11.22,14.25h-7.14l-9.34-12.13v12.13h-6.12v-27.03Z"/>
+          <path d="M243.27,167.38h5.44v28.73h-5.44v-28.73Z"/>
+          <path d="M250.15,190.63c0-4.61,4.23-6.35,10.28-6.35h2.23v-.79c0-2.34-.72-3.63-3.21-3.63-2.15,0-3.14,1.1-3.36,2.8h-5.18c.34-4.69,4.04-6.77,8.88-6.77s8.28,1.97,8.28,7.33v12.89h-5.33v-2.38c-1.13,1.59-2.87,2.8-5.97,2.8-3.59,0-6.61-1.74-6.61-5.9ZM262.66,189.19v-1.66h-2.12c-3.17,0-5.03.68-5.03,2.8,0,1.44.87,2.38,2.87,2.38,2.42,0,4.27-1.32,4.27-3.52Z"/>
+          <path d="M269.73,176.34h5.48v3.78c1.25-2.65,3.17-4.04,6.39-4.08v5.1c-4.04-.04-6.39,1.29-6.39,5.06v9.9h-5.48v-19.77Z"/>
+          <path d="M281.33,186.43v-.3c0-6.2,4.5-10.24,10.43-10.24s10.39,3.97,10.39,10.13v.3c0,6.24-4.5,10.21-10.43,10.21s-10.39-3.93-10.39-10.09ZM296.6,186.36v-.26c0-3.78-1.78-6.05-4.84-6.05s-4.84,2.19-4.84,5.97v.3c0,3.78,1.74,6.05,4.84,6.05s4.84-2.27,4.84-6.01Z"/>
+          <path d="M219.95,218.04v-.3c0-8.2,5.74-13.8,13.42-13.8,6.5,0,11.34,3.17,11.98,9.83h-6.27c-.45-3.25-2.27-4.99-5.67-4.99-4.27,0-6.99,3.33-6.99,8.92v.3c0,5.59,2.57,8.84,7.03,8.84,3.36,0,5.71-1.7,6.2-5.18h6.01c-.68,6.69-5.48,10.13-12.13,10.13-8.84,0-13.57-5.44-13.57-13.76Z"/>
+          <path d="M246.41,221.71v-.3c0-6.2,4.5-10.24,10.43-10.24s10.39,3.97,10.39,10.13v.3c0,6.24-4.5,10.21-10.43,10.21s-10.39-3.93-10.39-10.09ZM261.68,221.63v-.26c0-3.78-1.78-6.05-4.84-6.05s-4.84,2.19-4.84,5.97v.3c0,3.78,1.74,6.05,4.84,6.05s4.84-2.27,4.84-6.01Z"/>
+          <path d="M268.63,211.62h5.48v3.02c.98-1.85,3.1-3.48,6.05-3.48,2.61,0,4.57,1.1,5.52,3.44,1.59-2.38,4.16-3.44,6.65-3.44,3.67,0,6.5,2.31,6.5,7.56v12.66h-5.44v-12.06c0-2.53-1.13-3.67-3.1-3.67-2.12,0-3.82,1.36-3.82,4.04v11.68h-5.44v-12.06c0-2.53-1.17-3.67-3.1-3.67-2.12,0-3.82,1.36-3.82,4.04v11.68h-5.48v-19.77Z"/>
+          <path d="M300.34,224.36v-12.74h5.44v11.98c0,2.68,1.1,3.97,3.44,3.97s4.12-1.44,4.12-4.35v-11.6h5.44v19.77h-5.44v-3.1c-1.02,2-3.02,3.52-6.27,3.52-3.85,0-6.73-2.27-6.73-7.45Z"/>
+          <path d="M320.6,211.62h5.48v3.14c.98-1.97,3.14-3.59,6.42-3.59,3.89,0,6.65,2.34,6.65,7.64v12.59h-5.48v-11.79c0-2.68-1.06-3.97-3.48-3.97s-4.12,1.44-4.12,4.35v11.42h-5.48v-19.77Z"/>
+          <path d="M340.56,205.95c0-1.7,1.36-2.99,3.1-2.99s3.14,1.29,3.14,2.99-1.36,2.99-3.14,2.99-3.1-1.29-3.1-2.99ZM340.97,211.62h5.44v19.77h-5.44v-19.77Z"/>
+          <path d="M347.96,221.75v-.3c0-6.39,4.57-10.28,10.2-10.28,4.57,0,8.81,2,9.3,7.67h-5.18c-.38-2.31-1.78-3.36-4.01-3.36-2.83,0-4.72,2.12-4.72,5.9v.3c0,3.97,1.78,6.01,4.84,6.01,2.19,0,3.97-1.29,4.23-3.82h4.95c-.3,4.69-3.7,7.94-9.45,7.94s-10.17-3.59-10.17-10.05Z"/>
+          <path d="M368.22,225.9c0-4.61,4.23-6.35,10.28-6.35h2.23v-.79c0-2.34-.72-3.63-3.21-3.63-2.15,0-3.14,1.1-3.36,2.8h-5.18c.34-4.69,4.04-6.77,8.88-6.77s8.28,1.97,8.28,7.33v12.89h-5.33v-2.38c-1.13,1.59-2.87,2.8-5.97,2.8-3.59,0-6.61-1.74-6.61-5.9ZM380.73,224.47v-1.66h-2.12c-3.17,0-5.03.68-5.03,2.8,0,1.44.87,2.38,2.87,2.38,2.42,0,4.27-1.32,4.27-3.52Z"/>
+          <path d="M387.35,221.75v-.3c0-6.39,4.57-10.28,10.2-10.28,4.57,0,8.81,2,9.3,7.67h-5.18c-.38-2.31-1.78-3.36-4.01-3.36-2.83,0-4.72,2.12-4.72,5.9v.3c0,3.97,1.78,6.01,4.84,6.01,2.19,0,3.97-1.29,4.23-3.82h4.95c-.3,4.69-3.7,7.94-9.45,7.94s-10.17-3.59-10.17-10.05Z"/>
+          <path d="M407.87,205.95c0-1.7,1.36-2.99,3.1-2.99s3.14,1.29,3.14,2.99-1.36,2.99-3.14,2.99-3.1-1.29-3.1-2.99ZM408.28,211.62h5.44v19.77h-5.44v-19.77Z"/>
+          <path d="M415.28,221.71v-.3c0-6.2,4.5-10.24,10.43-10.24s10.39,3.97,10.39,10.13v.3c0,6.24-4.5,10.21-10.43,10.21s-10.39-3.93-10.39-10.09ZM430.54,221.63v-.26c0-3.78-1.78-6.05-4.84-6.05s-4.84,2.19-4.84,5.97v.3c0,3.78,1.74,6.05,4.84,6.05s4.84-2.27,4.84-6.01ZM425.63,202.92h5.74l-3.93,6.01h-3.97l2.15-6.01Z"/>
+          <path d="M437.5,211.62h5.48v3.14c.98-1.97,3.14-3.59,6.42-3.59,3.89,0,6.65,2.34,6.65,7.64v12.59h-5.48v-11.79c0-2.68-1.06-3.97-3.48-3.97s-4.12,1.44-4.12,4.35v11.42h-5.48v-19.77Z"/>
+        </g>
+  </svg>
+  <div class="title-block">
+    <h1>Capital en movimiento</h1>
+    <span class="doc-sub">GDI Valores · Plan de trabajo</span>
+  </div>
+ </div>
+</header>
+
+<nav class="doc-nav">
+  <ol>
+    <li><a href="#s1"><span class="n">1</span>Objetivo y estrategia</a></li>
+    <li><a href="#s2"><span class="n">2</span>Equipos</a></li>
+    <li><a href="#s3"><span class="n">3</span>Calendario día a día</a></li>
+    <li><a href="#s4"><span class="n">4</span>Calendario por persona</a></li>
+    <li><a href="#s5"><span class="n">5</span>Milestones</a></li>
+  </ol>
+</nav>
+
+<div class="page">
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="doc-section" id="s1">
+    <div class="sec-head"><span class="num">1</span><h2>Qué queremos lograr y cómo lo vamos a lograr</h2></div>
+    <div class="obj-grid">
+      <div class="card obj-main">
+        <h3>Objetivo integrado</h3>
+        <p>La campaña genera prospectos para los Fondos Líquidos de GDI Valores, pero eso es el mecanismo, no el fin. Lo que queremos aprender —con la misma prioridad— es <b>cómo reacciona el mercado ante el producto</b> y <b>cuánto cuesta traer un cliente nuevo hasta él</b>, desglosado por canal (LinkedIn vs. Meta). La generación de prospectos es el vehículo para llegar a esas dos respuestas.</p>
+
+        <h3>Concepto de campaña</h3>
+        <p>"Capital en movimiento" juega con el doble sentido de movimiento: el dinero rinde (se mueve, crece) y a la vez está siempre disponible (se puede mover, retirar). Se contrapone a la imagen de dinero "estancado" en una cuenta bancaria o "atado" a un plazo fijo. Mensaje rector: el capital puede mantenerse en movimiento mediante una opción administrada profesionalmente, con condiciones y riesgos explicados de forma transparente.</p>
+
+        <h3>Cómo lo vamos a lograr</h3>
+        <p>Un customer journey de 13 pasos, desde el anuncio hasta la firma y recepción de fondos, ejecutado en 10 días de preparación y 30 días de campaña activa divididos en 2 vuelos de 15 días, con una revisión intermedia entre ambos.</p>
+        <figure class="journey-fig">
+          <svg viewBox="0 0 740 340" role="img" aria-label="Customer journey de 13 pasos: del anuncio en LinkedIn/Meta a la firma y recepción de fondos, con el proceso interno de GDI al final.">
+            <defs>
+              <marker id="jarrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="currentColor"/>
+              </marker>
+            </defs>
+
+            <!-- proceso interno GDI band -->
+            <rect x="172" y="234" width="536" height="72" rx="14" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <text x="440" y="226" text-anchor="middle" font-size="11" font-weight="700" letter-spacing=".04em" fill="var(--gold)">PROCESO INTERNO GDI (POST-LEAD)</text>
+
+            <!-- connectors: row 1 (1-5) -->
+            <line x1="94" y1="70" x2="196" y2="70" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="244" y1="70" x2="346" y2="70" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="394" y1="70" x2="496" y2="70" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="544" y1="70" x2="646" y2="70" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <!-- drop to row 2 -->
+            <line x1="670" y1="94" x2="670" y2="146" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <!-- connectors: row 2 (6-9), right to left -->
+            <line x1="646" y1="170" x2="544" y2="170" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="496" y1="170" x2="394" y2="170" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="346" y1="170" x2="244" y2="170" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <!-- drop to row 3 -->
+            <line x1="220" y1="194" x2="220" y2="246" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <!-- connectors: row 3 (10-13), left to right -->
+            <line x1="244" y1="270" x2="346" y2="270" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="394" y1="270" x2="496" y2="270" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+            <line x1="544" y1="270" x2="646" y2="270" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)"/>
+
+            <!-- Row 1: Adquisición (blue) -->
+            <g fill="var(--blue)">
+              <circle cx="70" cy="70" r="24"/><circle cx="220" cy="70" r="24"/><circle cx="370" cy="70" r="24"/>
+            </g>
+            <!-- Row 1 tail + Row 2 start: Automatización (green) -->
+            <g fill="var(--green)">
+              <circle cx="520" cy="70" r="24"/><circle cx="670" cy="70" r="24"/><circle cx="670" cy="170" r="24"/>
+            </g>
+            <!-- Row 2: Agendamiento (teal) -->
+            <g fill="var(--teal)">
+              <circle cx="520" cy="170" r="24"/><circle cx="370" cy="170" r="24"/><circle cx="220" cy="170" r="24"/>
+            </g>
+            <!-- Row 3: Proceso interno GDI (gold) -->
+            <g fill="var(--gold)">
+              <circle cx="220" cy="270" r="24"/><circle cx="370" cy="270" r="24"/><circle cx="520" cy="270" r="24"/><circle cx="670" cy="270" r="24"/>
+            </g>
+
+            <!-- numbers -->
+            <g fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">
+              <text x="70" y="75">1</text><text x="220" y="75">2</text><text x="370" y="75">3</text><text x="520" y="75">4</text><text x="670" y="75">5</text>
+              <text x="670" y="175">6</text><text x="520" y="175">7</text><text x="370" y="175">8</text><text x="220" y="175">9</text>
+              <text x="220" y="275">10</text><text x="370" y="275">11</text><text x="520" y="275">12</text><text x="670" y="275">13</text>
+            </g>
+
+            <!-- labels -->
+            <g fill="currentColor" font-size="11.5" text-anchor="middle">
+              <text x="70" y="112">Anuncio</text><text x="220" y="112">Clic</text><text x="370" y="112">Calificación</text>
+              <text x="520" y="112">WhatsApp</text><text x="670" y="112">Flow</text>
+              <text x="670" y="212">Calendly</text><text x="520" y="212">Agenda</text><text x="370" y="212">Recordatorios</text><text x="220" y="212">Videollamada</text>
+              <text x="220" y="312">Documentación</text><text x="370" y="312">Compliance</text><text x="520" y="312">Contrato</text><text x="670" y="312">Firma y fondos</text>
+            </g>
+          </svg>
+          <figcaption>Del anuncio en LinkedIn/Meta a la firma y recepción de fondos — los últimos 4 pasos son el proceso interno de GDI, no parte de la pauta.</figcaption>
+        </figure>
+        <div class="journey-legend">
+          <span><i style="background:var(--blue)"></i>Adquisición</span>
+          <span><i style="background:var(--green)"></i>Conversación automatizada</span>
+          <span><i style="background:var(--teal)"></i>Agendamiento</span>
+          <span><i style="background:var(--gold)"></i>Proceso interno GDI</span>
+        </div>
+      </div>
+      <div class="side-stack">
+        <div class="card info-box">
+          <span class="k">Público</span>
+          <p class="v">Dueños de empresa, gerentes generales, directores financieros y responsables de tesorería, con capacidad de inversión en quetzales o dólares.</p>
+          <p class="v" style="margin-top:8px;">Personas que ya lograron un ahorro que les permite crecer — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000 — y necesitan un instrumento que les genere un buen interés. Probablemente ya están considerando tener inversiones y salir de la banca tradicional para invertir su dinero fuera de ella.</p>
+        </div>
+        <div class="card info-box">
+          <span class="k">Cómo medimos</span>
+          <p class="v">Costo por prospecto y calidad reportada por el equipo comercial, por canal — ya cotizado en el panel de medición, sin necesidad de un entregable nuevo.</p>
+        </div>
+        <div class="card info-box">
+          <span class="k">Duración cotizada</span>
+          <p class="v">10 días de preparación + 30 días de campaña activa en 2 vuelos de 15 días + cierre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="doc-section" id="s2">
+    <div class="sec-head"><span class="num">2</span><h2>Equipos de trabajo y responsabilidades</h2></div>
+    <p class="sec-sub">Cuatro equipos, con Klaro dividido en tres frentes. Todos trabajan sobre el mismo calendario de la sección 3.</p>
+    <div class="team-grid" id="team-grid"></div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="doc-section" id="s3">
+    <div class="sec-head"><span class="num">3</span><h2>Calendario día a día</h2></div>
+    <p class="sec-sub">Fuente de verdad de todo el plan: fecha, tarea, entregable y responsable. La sección 4 es esta misma información, filtrada por persona.</p>
+    <div id="calendar"></div>
+  </section>
+
+  <!-- ================= SECTION 4 ================= -->
+  <section class="doc-section" id="s4">
+    <div class="sec-head"><span class="num">4</span><h2>Calendario por persona</h2></div>
+    <p class="sec-sub">Selecciona una persona para ver solo sus tareas, en orden de fecha — mismos datos de la sección 3.</p>
+    <div class="person-chips" id="person-chips"></div>
+    <div id="person-view"></div>
+  </section>
+
+  <!-- ================= SECTION 5 ================= -->
+  <section class="doc-section" id="s5">
+    <div class="sec-head"><span class="num">5</span><h2>Milestones y criterios de victoria</h2></div>
+    <p class="sec-sub">Los reportes de campaña no llevan meta numérica de volumen — el criterio de victoria es entregar información completa y a tiempo.</p>
+    <div class="milestones" id="milestones"></div>
+  </section>
+
+  <footer>
+    <span>Klaro Comunicación · Plan de trabajo interno — GDI Valores, Flow, Klaro</span>
+    <span>Basado en la cotización del 12/08/2026</span>
+  </footer>
+</div>
+
+<script>
+const TEAMS = {
+  planificacion: { label: 'Klaro · Planificación', color: 'var(--blue)' },
+  diseno:        { label: 'Klaro · Diseño',         color: 'var(--green)' },
+  medios:        { label: 'Klaro · Medios',          color: 'var(--teal)' },
+  gdi:           { label: 'GDI Valores',             color: 'var(--gold)' },
+  flow:          { label: 'Flow',                    color: 'var(--violet)' },
+};
+
+const PEOPLE = {
+  rodrigo:   { name: 'Rodrigo',     team: 'gdi',           role: 'Aprobaciones' },
+  jose:      { name: 'José',        team: 'gdi',           role: 'Ejecución GDI' },
+  andssuer:  { name: 'Andssuer',    team: 'diseno',        role: 'Piezas y video' },
+  jason:     { name: 'Jason',       team: 'diseno',        role: 'Piezas y video' },
+  fredy:     { name: 'Fredy',       team: 'planificacion', role: 'Dirección creativa' },
+  mariajose: { name: 'María José',  team: 'planificacion', role: 'Planificación' },
+  vladimir:  { name: 'Vladimir',    team: 'planificacion', role: 'PM' },
+  majo:      { name: 'Majo',        team: 'planificacion', role: 'Facturación / cuentas' },
+  mercedes:  { name: 'Mercedes',    team: 'medios',        role: 'Medios' },
+  flow:      { name: 'Flow',        team: 'flow',          role: 'Automatización IA' },
+  frank:     { name: 'Frank',       team: 'flow',          role: 'Configuración de correos' },
+};
+
+const TEAM_CARDS = [
+  { id:'planificacion', title:'Klaro · Planificación', members:'Fredy, María José, Vladimir (PM), Majo (facturación)',
+    tasks:[
+      'Coordinación general de los 4 equipos y del cronograma.',
+      'Alineación inicial con GDI y Aura: objetivos, públicos, mensajes, responsables.',
+      'Fredy además aprueba la creatividad (dirección creativa) antes de mandarla a GDI.',
+      'Conducir la revisión intermedia y el cierre del proyecto.',
+    ]},
+  { id:'diseno', title:'Klaro · Diseño', members:'Andssuer y Jason — se reparten el trabajo entre ellos',
+    tasks:[
+      'Producir toda la creatividad: 8 imágenes, 2 carruseles, 2 videos, 15 posts orgánicos.',
+      'Entregar cada pieza a la aprobación de Fredy antes de enviarla a GDI.',
+      'Aplicar los ajustes de las rondas de revisión (2 incluidas).',
+    ]},
+  { id:'medios', title:'Klaro · Medios', members:'Mercedes',
+    tasks:[
+      'Preparar y lanzar la campaña en LinkedIn y Meta (permisos, audiencias, presupuestos, UTMs).',
+      'Cargar el contenido orgánico y activar el lanzamiento gradual.',
+      'Apoyar a Flow en la configuración técnica conjunta.',
+      'Generar los reportes de campaña y ajustar según el plan de lanzamiento.',
+    ]},
+  { id:'gdi', title:'GDI Valores', members:'Rodrigo (aprobaciones) · José (ejecución)',
+    tasks:[
+      'Rodrigo: firmar la orden de compra y aprobar artes y textos.',
+      'José: comprar Brevo y Calendly; trabajar con Flow en la clasificación y respuestas automatizadas.',
+      'José: preparar la agenda comercial para recibir los leads.',
+      'José: filtro de compliance, documentos, firma y recepción de fondos.',
+    ]},
+  { id:'flow', title:'Flow', members:'Equipo externo',
+    tasks:[
+      'Configurar las aplicaciones para recibir los leads por WhatsApp.',
+      'Que la IA haga todo el trabajo de clasificación y respuesta automatizada del lead.',
+      'Conectar el flujo con Calendly para el agendamiento.',
+      'Optimizar respuestas y clasificación junto con José (GDI).',
+    ]},
+];
+
+// ---- helpers ----
+function it(who, task, deliverable){ return { who: Array.isArray(who) ? who : [who], task, deliverable }; }
+
+const BASE_WEEKDAY = () => [
+  it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+  it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance sobre la documentación recibida; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
+  it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
+];
+const BASE_WEEKEND = () => [
+  it('flow', 'Gestionar las conversaciones de WhatsApp entrantes; solo ofrece horarios de Calendly de días hábiles, ya que José no trabaja ni agenda videollamadas los fines de semana.', 'Leads clasificados, agendados para el próximo día hábil.'),
+];
+const WEEKLY_REPORT = (n) => [
+  it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+  it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
+  it('mercedes', `Entregar el reporte semanal ${n} (inversión, alcance, clics, conversiones, costo por prospecto) y ajustar segmentación/presupuesto.`, `Reporte semanal ${n} entregado + ajustes aplicados.`),
+];
+
+const SCHEDULE = [
+  // ---------------- PREPARACIÓN ----------------
+  { date:'2026-08-28', dow:'Vie', phase:'prep', milestone:'Firma de la orden de compra', items:[
+    it('rodrigo', 'Firmar la orden de compra y aceptar formalmente la propuesta.', 'Orden de compra firmada.'),
+    it('majo', 'Enviar a GDI la orden de compra inicial y la facturación inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.'),
+    it('rodrigo', 'Recibir y procesar la orden de compra y la factura inicial (anticipo 60%) enviada por Majo.', 'Anticipo en proceso de pago.'),
+  ]},
+  { date:'2026-08-29', dow:'Sáb', phase:'prep', offday:true, items:[] },
+  { date:'2026-08-30', dow:'Dom', phase:'prep', offday:true, items:[] },
+  { date:'2026-08-31', dow:'Lun', phase:'prep', items:[
+    it(['andssuer','jason'], 'Brief y bocetos de las 8 piezas de imagen, 2 carruseles y 2 videos de pauta (Vuelo 1).', 'Bocetos listos para producción.'),
+    it('mercedes', 'Gestionar permisos de las cuentas de LinkedIn Ads y Meta Ads; crear la plataforma de medición.', 'Cuentas con permisos + panel de medición listo.'),
+    it(['jose','flow'], 'Confirmar los criterios finales de calificación de un lead (puesto, moneda Q/USD, monto a invertir — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000) y que Flow configure el bot con esa lógica de clasificación.', 'Criterios de calificación confirmados y aplicados en el bot.'),
+    it(['jose','flow'], 'Comprar Brevo Starter y Calendly Teams (2 asientos) entre lunes y miércoles, y que Flow los conecte.', 'Brevo y Calendly contratados y conectados por Flow.'),
+    it('flow', 'Configurar el agente de IA y la base de datos de campaña durante toda la semana.', 'Agente Flow en configuración.'),
+    it(['mercedes','jose'], 'Planificar el contenido orgánico general: los puntos y temas importantes para explicar los servicios de GDI y los Fondos Líquidos al usuario, y armar una matriz de piezas para que Diseño las produzca.', 'Matriz de piezas de contenido orgánico lista para Diseño.'),
+    it(['majo','rodrigo','jose'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo, Rodrigo y José.', 'Pago del anticipo coordinado.'),
+    it(['majo','frank'], 'Enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción) y coordinar el anticipo.', 'Orden de pago a Frank enviada y anticipo coordinado.'),
+  ]},
+  { date:'2026-09-01', dow:'Mar', phase:'prep', items:[
+    it(['andssuer','jason'], 'Producción de las piezas de imagen y carruseles de pauta (Vuelo 1).', 'Avance de piezas.'),
+    it(['mercedes','jose','fredy','vladimir'], 'Configurar el formulario nativo (3 preguntas de calificación) y el correo automático de bienvenida — Mercedes ejecuta, con apoyo de José, guía de segmentación de Fredy, y coordinación de Vladimir.', 'Formulario + correo automático configurados.'),
+    it(['vladimir','jose'], 'Desarrollar la idea y el copy de la secuencia de correos de seguimiento, con apoyo de GDI.', 'Borrador de la secuencia de correos.'),
+    it(['fredy','vladimir','jose'], 'Sesión previa: revisar en conjunto el guion de la conversación de WhatsApp antes de que Flow lo construya.', 'Guion revisado en conjunto.'),
+    it(['andssuer','jason'], 'Producir los 15 posts de contenido orgánico general, según la matriz de piezas de Mercedes y José (explican el servicio, sin links), para que Mercedes los cargue mañana.', 'Contenido orgánico general listo para cargar.'),
+    it(['frank','jose'], 'Verificar que Brevo y Calendly están activos y con los datos correctos.', 'Herramientas de GDI activas.'),
+  ]},
+  { date:'2026-09-02', dow:'Mié', phase:'prep', items:[
+    it(['andssuer','jason'], 'Entregar el primer set de piezas de pauta (Vuelo 1) a revisión.', 'Set de piezas entregado.'),
+    it(['flow','jose'], 'Definir el guion de la conversación de WhatsApp (confirmar interés en quetzales o dólares) y conectar con Calendly, a partir de la sesión previa; José aprueba el guion final.', 'Guion de WhatsApp + integración a Calendly, aprobado por José.'),
+    it('fredy', 'Primera revisión creativa de las piezas antes de mandarlas a GDI.', 'Piezas visadas internamente.'),
+    it('mercedes', 'Configurar audiencias, presupuestos y eventos de conversión (borrador, sin publicar); armar el esquema de atribución por canal: Meta ya adjunta su propio identificador (ctwa_clid) a los mensajes de WhatsApp, así que para LinkedIn (que no tiene ese mecanismo nativo) hay que armar un link intermedio propio antes de redirigir a WhatsApp, y el WhatsApp del correo de bienvenida de Brevo lleva su propia referencia también — todo apunta de vuelta al bot de WhatsApp, ninguno a un sitio externo.', 'Esquema de atribución por canal (LinkedIn, Meta, correo) listo para que Flow lo capture.'),
+    it('mercedes', 'Cargar las 15 publicaciones de contenido orgánico general (solo explican el servicio, sin links) para que las redes de GDI no arranquen vacías.', 'Contenido orgánico general cargado.'),
+    it('flow', 'Prueba interna del flujo WhatsApp → Calendly.', 'Flujo probado internamente.'),
+    it(['frank','andssuer','jason'], 'Configurar técnicamente el envío de la secuencia de correos (Frank) y aplicarle una plantilla visual atractiva (Diseño), en conjunto.', 'Secuencia de correos configurada técnicamente y con plantilla visual lista.'),
+  ]},
+  { date:'2026-09-03', dow:'Jue', phase:'prep', items:[
+    it(['andssuer','jason'], 'Ajustar las piezas de pauta (Vuelo 1) según los comentarios de la revisión (ronda 1 de 2 incluidas).', 'Piezas ajustadas.'),
+    it('jose', 'Ronda de aprobación de las piezas visadas por Fredy.', 'Piezas aprobadas o con comentarios.'),
+    it('frank', 'Cargar la secuencia de correos (ya configurada, con plantilla de Diseño) en el stack de tecnología.', 'Secuencia de correos activa en el stack.'),
+    it('flow', 'Configurar recordatorios automáticos de Calendly por WhatsApp y notificación interna a GDI al agendar.', 'Recordatorios y notificaciones activos.'),
+  ]},
+  { date:'2026-09-04', dow:'Vie', phase:'prep', items:[
+    it('fredy', 'Revisión creativa final de las piezas de pauta (Vuelo 1) antes de la aprobación de GDI.', 'Piezas finales visadas.'),
+    it(['mercedes','flow','jose'], 'Prueba end-to-end completa del customer journey (Klaro, GDI y Flow juntos).', 'Journey verificado de punta a punta.'),
+  ]},
+  { date:'2026-09-05', dow:'Sáb', phase:'prep', milestone:'Piezas y tecnología listas', items:[
+    it('jose', 'Aprobación final de las piezas de pauta (Vuelo 1) ajustadas.', 'Piezas aprobadas por GDI.'),
+  ]},
+  { date:'2026-09-06', dow:'Dom', phase:'prep', offday:true, items:[] },
+
+  // ---------------- VUELO 1 ----------------
+  { date:'2026-09-07', dow:'Lun', phase:'vuelo1', milestone:'Lanzamiento de campaña', items:[
+    it('mercedes', 'Activación gradual de las campañas en LinkedIn y Meta.', 'Campañas activas.'),
+    it('jose', 'Agenda comercial de GDI lista para recibir videollamadas.', 'Agenda comercial operativa.'),
+    it('flow', 'Verificación en vivo del flujo con tráfico real.', 'Flujo confirmado con tráfico real.'),
+  ]},
+  { date:'2026-09-08', dow:'Mar', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-09', dow:'Mié', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-10', dow:'Jue', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-11', dow:'Vie', phase:'vuelo1', items: WEEKLY_REPORT(1) },
+  { date:'2026-09-12', dow:'Sáb', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-13', dow:'Dom', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [
+    ...BASE_WEEKDAY(),
+    it(['vladimir','mercedes','jose'], 'Sesión para planificar el contenido orgánico del Vuelo 2, con los aprendizajes de la primera semana de campaña (originalmente martes 15, movido por el feriado del 15/09 en Guatemala).', 'Plan de contenido orgánico del Vuelo 2 definido.'),
+  ] },
+  { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: [...BASE_WEEKDAY(), it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.')] },
+  { date:'2026-09-18', dow:'Vie', phase:'vuelo1', items: [...WEEKLY_REPORT(2), it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.')] },
+  { date:'2026-09-19', dow:'Sáb', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-20', dow:'Dom', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-21', dow:'Lun', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
+    it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+    it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
+    it('mercedes', 'Consolidar las métricas de los 15 días del Vuelo 1 (reporte corrida 1): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 1 entregado.'),
+  ]},
+
+  // ---------------- BUFFER + REVISIÓN + VUELO 2 ----------------
+  { date:'2026-09-22', dow:'Mar', phase:'vuelo2', items:[
+    it(['fredy','mercedes'], 'Preparar el análisis detallado de resultados del Vuelo 1 (reporte corrida 1) para presentarlo en la revisión intermedia.', 'Análisis del Vuelo 1 listo.'),
+  ]},
+  { date:'2026-09-23', dow:'Mié', phase:'vuelo2', milestone:'Revisión intermedia', items:[
+    it('fredy', 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura.', 'Resultados presentados.'),
+    it('vladimir', 'Coordinar la revisión intermedia con GDI y Aura.', 'Revisión intermedia realizada.'),
+    it('rodrigo', 'Revisar la calidad de los prospectos y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Ajustes del Vuelo 2 acordados.'),
+  ]},
+  { date:'2026-09-24', dow:'Jue', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
+    it('mercedes', 'Aplicar los ajustes acordados y relanzar la campaña (día 1 del Vuelo 2), al menos 2 días después del cierre del Vuelo 1 para tener aprendizajes y ajustes claros.', 'Vuelo 2 activo con los ajustes aplicados.'),
+  ]},
+  { date:'2026-09-25', dow:'Vie', phase:'vuelo2', items: WEEKLY_REPORT(3) },
+  { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-09-29', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-09-30', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-01', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-02', dow:'Vie', phase:'vuelo2', items: WEEKLY_REPORT(4) },
+  { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-06', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-07', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-08', dow:'Jue', phase:'vuelo2', milestone:'Reporte corrida 2 (cierre Vuelo 2)', items:[
+    it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+    it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
+    it('mercedes', 'Consolidar las métricas finales del Vuelo 2 (reporte corrida 2): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 2 entregado.'),
+  ]},
+
+  // ---------------- CIERRE ----------------
+  { date:'2026-10-09', dow:'Vie', phase:'cierre', items:[
+    it(['fredy','mariajose','vladimir'], 'Consolidar los resultados de ambos vuelos y preparar el informe final (aprendizajes y recomendaciones).', 'Borrador del informe final.'),
+  ]},
+  { date:'2026-10-10', dow:'Sáb', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-11', dow:'Dom', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-12', dow:'Lun', phase:'cierre', milestone:'Reporte final y cierre', items:[
+    it(['fredy','vladimir'], 'Reunión de cierre con GDI y Aura: aprendizajes y recomendaciones.', 'Informe final entregado.'),
+    it('rodrigo', 'Liberar el pago final (40%, US$3,346.56).', 'Pago final liberado.'),
+  ]},
+];
+
+const PHASE_LABEL = { prep:'Preparación', vuelo1:'Vuelo 1', vuelo2:'Vuelo 2 · Revisión intermedia', cierre:'Cierre' };
+const PHASE_COLOR = { prep:'var(--blue)', vuelo1:'var(--green)', vuelo2:'var(--gold)', cierre:'var(--violet)' };
+
+const MONTHS = { '08':'Ago', '09':'Sep', '10':'Oct' };
+function dParts(dateStr){ const [y,m,d] = dateStr.split('-'); return { num: d, mon: MONTHS[m] }; }
+
+// ---- render: teams ----
+const teamGrid = document.getElementById('team-grid');
+TEAM_CARDS.forEach(t => {
+  const el = document.createElement('div');
+  el.className = 'card team-card';
+  el.style.setProperty('--team-color', TEAMS[t.id].color);
+  el.innerHTML = `
+    <h3><span class="dot"></span>${t.title}</h3>
+    <div class="members">${t.members}</div>
+    <ul>${t.tasks.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  teamGrid.appendChild(el);
+});
+
+// ---- render: calendar (section 3) ----
+const calendarEl = document.getElementById('calendar');
+let currentPhase = null;
+SCHEDULE.forEach(day => {
+  if (day.phase !== currentPhase) {
+    currentPhase = day.phase;
+    const h = document.createElement('div');
+    h.className = 'phase-title';
+    h.style.setProperty('--phase-color', PHASE_COLOR[day.phase]);
+    h.innerHTML = `${PHASE_LABEL[day.phase]}<span class="line"></span>`;
+    calendarEl.appendChild(h);
+  }
+  const card = document.createElement('div');
+  card.className = 'day-card' + (day.offday ? ' offday' : '') + (day.milestone ? ' milestone' : '');
+  card.style.setProperty('--phase-color', PHASE_COLOR[day.phase]);
+  const dp = dParts(day.date);
+  const dateHtml = `<div class="day-date"><span class="dow">${day.dow}</span><span class="num">${dp.num}</span><span class="mon">${dp.mon}</span></div>`;
+
+  let itemsHtml;
+  if (day.offday) {
+    itemsHtml = `<div class="offday-label">Fin de semana — sin trabajo de equipo programado.</div>`;
+  } else {
+    itemsHtml = `<div class="day-items">` +
+      (day.milestone ? `<div class="milestone-flag">◆ ${day.milestone}</div>` : '') +
+      day.items.map(row => {
+        const tags = row.who.map(id => {
+          const p = PEOPLE[id];
+          return `<span class="who-tag" style="--who-color:${TEAMS[p.team].color}">${p.name}</span>`;
+        }).join('');
+        return `<div class="item-row">
+          <div class="who-tags">${tags}</div>
+          <div class="item-text"><div class="task">${row.task}</div><div class="deliv">Entregable: <b>${row.deliverable}</b></div></div>
+        </div>`;
+      }).join('') +
+    `</div>`;
+  }
+  card.innerHTML = dateHtml + itemsHtml;
+  calendarEl.appendChild(card);
+});
+
+// ---- render: person filter (section 4) — same SCHEDULE data ----
+const chipsEl = document.getElementById('person-chips');
+const personViewEl = document.getElementById('person-view');
+let activePerson = null;
+
+Object.entries(PEOPLE).forEach(([id, p]) => {
+  const chip = document.createElement('button');
+  chip.className = 'p-chip';
+  chip.type = 'button';
+  chip.setAttribute('aria-pressed', 'false');
+  chip.style.setProperty('--chip-color', TEAMS[p.team].color);
+  chip.innerHTML = `<span class="dot" style="background:${TEAMS[p.team].color}"></span>${p.name}`;
+  chip.addEventListener('click', () => selectPerson(id));
+  chipsEl.appendChild(chip);
+});
+
+function selectPerson(id){
+  activePerson = id;
+  [...chipsEl.children].forEach((chip, i) => {
+    const pid = Object.keys(PEOPLE)[i];
+    chip.setAttribute('aria-pressed', String(pid === id));
+  });
+  renderPersonView();
+}
+
+function renderPersonView(){
+  personViewEl.innerHTML = '';
+  if (!activePerson) {
+    personViewEl.innerHTML = '<div class="empty-hint">Selecciona una persona arriba para ver su calendario.</div>';
+    return;
+  }
+  const rows = [];
+  SCHEDULE.forEach(day => {
+    (day.items || []).forEach(row => {
+      if (row.who.includes(activePerson)) rows.push({ date: day.date, dow: day.dow, milestone: day.milestone, ...row });
+    });
+  });
+  if (rows.length === 0) {
+    personViewEl.innerHTML = '<div class="empty-hint">Sin tareas asignadas en el calendario.</div>';
+    return;
+  }
+  rows.forEach(r => {
+    const dp = dParts(r.date);
+    const others = r.who.filter(id => id !== activePerson).map(id => PEOPLE[id].name);
+    const row = document.createElement('div');
+    row.className = 'p-row';
+    row.innerHTML = `
+      <div class="d">${r.dow} ${dp.num} ${dp.mon}</div>
+      <div>
+        ${r.milestone ? `<div class="milestone-flag" style="margin-bottom:4px;">◆ ${r.milestone}</div>` : ''}
+        <div class="task">${r.task}</div>
+        <div class="deliv">Entregable: <b>${r.deliverable}</b></div>
+        ${others.length ? `<div class="deliv">Junto con: ${others.join(', ')}</div>` : ''}
+      </div>`;
+    personViewEl.appendChild(row);
+  });
+}
+renderPersonView();
+
+// ---- render: milestones (section 5) ----
+const MILESTONES = [
+  { date:'2026-08-28', color:'var(--blue)',  title:'Firma de la orden de compra',
+    crit:'Rodrigo firma la aceptación formal antes de que venza la vigencia de la cotización — sin esto no se puede facturar ni arrancar el cronograma en firme.' },
+  { date:'2026-09-05', color:'var(--green)', title:'Revisión de piezas (aprobación final)',
+    crit:'Las 8 imágenes, 2 carruseles, 2 videos, 15 posts orgánicos y la secuencia de correos quedan aprobados por Fredy y por José, dentro de las 2 rondas de ajuste incluidas.' },
+  { date:'2026-09-04', color:'var(--teal)',  title:'Configuración tecnológica completa',
+    crit:'El customer journey completo (anuncio → formulario → WhatsApp → Flow → Calendly → notificación a GDI) funciona de punta a punta en la prueba end-to-end.' },
+  { date:'2026-09-07', color:'var(--blue)',  title:'Lanzamiento de campaña',
+    crit:'Campañas activas en LinkedIn y Meta, con tráfico real fluyendo correctamente por todo el journey.' },
+  { date:'2026-09-21', color:'var(--gold)',  title:'Reporte corrida 1 (cierre Vuelo 1)',
+    crit:'Reporte completo y a tiempo con el costo de adquisición desglosado por canal y la calidad reportada por el equipo comercial. Sin meta numérica de volumen.' },
+  { date:'2026-10-08', color:'var(--gold)',  title:'Reporte corrida 2 (cierre Vuelo 2)',
+    crit:'Mismo criterio que la corrida 1, incorporando el efecto de los ajustes aplicados tras la revisión intermedia.' },
+  { date:'2026-10-12', color:'var(--violet)',title:'Reporte final y cierre',
+    crit:'Informe consolidado de ambos vuelos —costo de adquisición por canal, reacción del mercado al producto, aprendizajes y recomendaciones— entregado en la reunión de cierre.' },
+];
+
+const milestonesEl = document.getElementById('milestones');
+MILESTONES.forEach(m => {
+  const dp = dParts(m.date);
+  const el = document.createElement('div');
+  el.className = 'm-item';
+  el.style.setProperty('--m-color', m.color);
+  el.innerHTML = `
+    <div class="m-head"><span class="m-date">${dp.num} ${dp.mon} 2026</span><span class="m-title">${m.title}</span></div>
+    <div class="m-crit">${m.crit}</div>`;
+  milestonesEl.appendChild(el);
+});
+</script>

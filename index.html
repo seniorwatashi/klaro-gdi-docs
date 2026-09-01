@@ -13,7 +13,7 @@
 <style>
   :root{
     --blue:#4C83E5; --blue-deep:#2E5FC2; --header-bg:#1F4EA0; --green:#6FA83A; --green-bright:#94C750;
-    --teal:#2F8F82; --gold:#B9862E; --violet:#6B5FC4;
+    --teal:#2F8F82; --gold:#B9862E; --violet:#6B5FC4; --red:#D64545; --orange:#D97F1F;
     --bg:#F6F7FA; --surface:#FFFFFF; --surface-2:#EEF1F6; --surface-3:#F1F3F7; --nav-bg:#EEF4E4;
     --ink:#1E2430; --ink-muted:#5B6472; --line:#E2E5EC; --line-soft:#EBEDF2;
     --shadow: 0 1px 2px rgba(20,30,60,.06), 0 8px 24px -12px rgba(20,30,60,.16);
@@ -135,8 +135,12 @@
   .day-date .num{font-family:"IBM Plex Mono"; font-size:20px; font-weight:600;}
   .day-date .mon{font-size:11px; color:var(--ink-muted);}
   .day-items{display:flex; flex-direction:column; gap:10px;}
-  .item-row{display:grid; grid-template-columns:170px 1fr; gap:12px;}
+  .item-row{display:grid; grid-template-columns:170px 1fr; gap:12px; padding:6px 8px; border-left:3px solid transparent; border-radius:0 6px 6px 0;}
   @media (max-width:640px){.item-row{grid-template-columns:1fr;} .day-card{grid-template-columns:1fr;}}
+  .item-row.status-orange{border-left-color:var(--orange); background:color-mix(in srgb, var(--orange) 8%, transparent);}
+  .item-row.status-red{border-left-color:var(--red); background:color-mix(in srgb, var(--red) 8%, transparent);}
+  .item-row.status-hecho{opacity:.55;}
+  .item-row.status-hecho .check-line .task{text-decoration:line-through;}
   .who-tags{display:flex; flex-wrap:wrap; gap:5px; align-content:flex-start;}
   .who-tag{
     display:inline-flex; align-items:center; gap:6px; height:fit-content;
@@ -144,9 +148,19 @@
     background:color-mix(in srgb, var(--who-color, var(--blue)) 16%, var(--surface));
     color:var(--who-color, var(--blue)); width:fit-content;
   }
+  .check-line{display:flex; align-items:flex-start; gap:7px; cursor:default;}
+  .check-line input[type=checkbox]{margin:3px 0 0; flex:none; width:14px; height:14px; accent-color:var(--green);}
   .item-text .task{font-size:13.8px;}
   .item-text .deliv{font-size:12.6px; color:var(--ink-muted); margin-top:3px;}
   .item-text .deliv b{color:var(--ink); font-weight:600;}
+  .proceso-badge{
+    display:inline-block; margin:4px 0 0; font-family:"IBM Plex Mono"; font-size:10.5px;
+    text-transform:uppercase; letter-spacing:.05em; color:var(--gold);
+    background:color-mix(in srgb, var(--gold) 15%, var(--surface)); padding:2px 8px; border-radius:5px;
+  }
+  .status-legend{display:flex; flex-wrap:wrap; gap:16px; margin:10px 0 18px; font-size:12.5px; color:var(--ink-muted);}
+  .status-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .status-legend .sw{width:11px; height:11px; border-radius:3px; display:inline-block; flex:none;}
   .milestone-flag{
     display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700;
     color:var(--phase-color,var(--blue)); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px;
@@ -372,6 +386,12 @@
   <section class="doc-section" id="s3">
     <div class="sec-head"><span class="num">3</span><h2>Calendario día a día</h2></div>
     <p class="sec-sub">Fuente de verdad de todo el plan: fecha, tarea, entregable y responsable. La sección 4 es esta misma información, filtrada por persona.</p>
+    <div class="status-legend">
+      <span><input type="checkbox" checked disabled style="accent-color:var(--green)"> Hecho</span>
+      <span><span class="sw" style="background:var(--orange)"></span> 1 día de retraso</span>
+      <span><span class="sw" style="background:var(--red)"></span> 2+ días de retraso</span>
+      <span><span class="sw" style="background:var(--gold)"></span> En proceso</span>
+    </div>
     <div id="calendar"></div>
   </section>
 
@@ -561,7 +581,22 @@ const TEAM_CARDS = [
 ];
 
 // ---- helpers ----
-function it(who, task, deliverable){ return { who: Array.isArray(who) ? who : [who], task, deliverable }; }
+function it(who, task, deliverable, status){ return { who: Array.isArray(who) ? who : [who], task, deliverable, status: status || 'pendiente' }; }
+
+// Fecha de referencia para calcular retraso -- actualizar al hacer una nueva revisión día por día.
+const HOY = '2026-09-01';
+function diasDeRetraso(dateStr){
+  const d = new Date(dateStr + 'T00:00:00');
+  const h = new Date(HOY + 'T00:00:00');
+  return Math.round((h - d) / 86400000);
+}
+function statusInfo(row, dayDate){
+  const dias = diasDeRetraso(dayDate);
+  if (row.status === 'hecho') return { cls: 'status-hecho', checked: true, badge: '' };
+  const cls = dias >= 2 ? 'status-red' : dias === 1 ? 'status-orange' : '';
+  const badge = row.status === 'proceso' ? '<span class="proceso-badge">En proceso</span>' : '';
+  return { cls, checked: false, badge };
+}
 
 const BASE_WEEKDAY = () => [
   it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
@@ -587,22 +622,22 @@ const SCHEDULE = [
   { date:'2026-08-29', dow:'Sáb', phase:'prep', offday:true, items:[] },
   { date:'2026-08-30', dow:'Dom', phase:'prep', offday:true, items:[] },
   { date:'2026-08-31', dow:'Lun', phase:'prep', items:[
-    it(['andssuer','jason'], 'Brief y bocetos de las 8 piezas de imagen, 2 carruseles y 2 videos de pauta (Vuelo 1).', 'Bocetos listos para producción.'),
-    it('mercedes', 'Gestionar permisos de las cuentas de LinkedIn Ads y Meta Ads; crear la plataforma de medición.', 'Cuentas con permisos + panel de medición listo.'),
-    it(['jose','flow'], 'Confirmar los criterios finales de calificación de un lead (puesto, moneda Q/USD, monto a invertir — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000) y que Flow configure el bot con esa lógica de clasificación.', 'Criterios de calificación confirmados y aplicados en el bot.'),
-    it(['jose','flow'], 'Comprar Brevo Starter y Calendly Teams (2 asientos) entre lunes y miércoles, y que Flow los conecte.', 'Brevo y Calendly contratados y conectados por Flow.'),
-    it('flow', 'Configurar el agente de IA y la base de datos de campaña durante toda la semana.', 'Agente Flow en configuración.'),
-    it(['mercedes','jose'], 'Planificar el contenido orgánico general: los puntos y temas importantes para explicar los servicios de GDI y los Fondos Líquidos al usuario, y armar una matriz de piezas para que Diseño las produzca.', 'Matriz de piezas de contenido orgánico lista para Diseño.'),
-    it(['majo','jose'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo y José.', 'Pago del anticipo coordinado.'),
-    it(['majo','frank'], 'Enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción) y coordinar el anticipo.', 'Orden de pago a Frank enviada y anticipo coordinado.'),
+    it(['andssuer','jason'], 'Brief y bocetos de las 8 piezas de imagen, 2 carruseles y 2 videos de pauta (Vuelo 1).', 'Bocetos listos para producción.', 'pendiente'),
+    it('mercedes', 'Gestionar permisos de las cuentas de LinkedIn Ads y Meta Ads; crear la plataforma de medición.', 'Cuentas con permisos + panel de medición listo.', 'hecho'),
+    it(['jose','flow'], 'Confirmar los criterios finales de calificación de un lead (puesto, moneda Q/USD, monto a invertir — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000) y que Flow configure el bot con esa lógica de clasificación.', 'Criterios de calificación confirmados y aplicados en el bot.', 'pendiente'),
+    it(['jose','flow'], 'Comprar Brevo Starter y Calendly Teams (2 asientos) entre lunes y miércoles, y que Flow los conecte.', 'Brevo y Calendly contratados y conectados por Flow.', 'hecho'),
+    it('flow', 'Configurar el agente de IA y la base de datos de campaña durante toda la semana.', 'Agente Flow en configuración.', 'proceso'),
+    it(['mercedes','jose'], 'Planificar el contenido orgánico general: los puntos y temas importantes para explicar los servicios de GDI y los Fondos Líquidos al usuario, y armar una matriz de piezas para que Diseño las produzca.', 'Matriz de piezas de contenido orgánico lista para Diseño.', 'hecho'),
+    it(['majo','jose'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo y José.', 'Pago del anticipo coordinado.', 'pendiente'),
+    it(['majo','frank'], 'Enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción) y coordinar el anticipo.', 'Orden de pago a Frank enviada y anticipo coordinado.', 'pendiente'),
   ]},
   { date:'2026-09-01', dow:'Mar', phase:'prep', items:[
-    it(['andssuer','jason'], 'Producción de las piezas de imagen y carruseles de pauta (Vuelo 1).', 'Avance de piezas.'),
-    it(['mercedes','jose','fredy','vladimir'], 'Configurar el formulario nativo (3 preguntas de calificación) y el correo automático de bienvenida — Mercedes ejecuta, con apoyo de José, guía de segmentación de Fredy, y coordinación de Vladimir.', 'Formulario + correo automático configurados.'),
-    it(['vladimir','jose'], 'Desarrollar la idea y el copy de la secuencia de correos de seguimiento, con apoyo de GDI.', 'Borrador de la secuencia de correos.'),
-    it(['fredy','vladimir','jose'], 'Sesión previa: revisar en conjunto el guion de la conversación de WhatsApp antes de que Flow lo construya.', 'Guion revisado en conjunto.'),
-    it(['andssuer','jason'], 'Producir los 15 posts de contenido orgánico general, según la matriz de piezas de Mercedes y José (explican el servicio, sin links), para que Mercedes los cargue el jueves.', 'Contenido orgánico general listo para cargar.'),
-    it(['frank','jose'], 'Verificar que Brevo y Calendly están activos y con los datos correctos.', 'Herramientas de GDI activas.'),
+    it(['andssuer','jason'], 'Producción de las piezas de imagen y carruseles de pauta (Vuelo 1).', 'Avance de piezas.', 'pendiente'),
+    it(['mercedes','jose','fredy','vladimir'], 'Configurar el formulario nativo (3 preguntas de calificación) y el correo automático de bienvenida — Mercedes ejecuta, con apoyo de José, guía de segmentación de Fredy, y coordinación de Vladimir.', 'Formulario + correo automático configurados.', 'pendiente'),
+    it(['vladimir','jose'], 'Desarrollar la idea y el copy de la secuencia de correos de seguimiento, con apoyo de GDI.', 'Borrador de la secuencia de correos.', 'proceso'),
+    it(['fredy','vladimir','jose'], 'Sesión previa: revisar en conjunto el guion de la conversación de WhatsApp antes de que Flow lo construya.', 'Guion revisado en conjunto.', 'pendiente'),
+    it(['andssuer','jason'], 'Producir los 15 posts de contenido orgánico general, según la matriz de piezas de Mercedes y José (explican el servicio, sin links), para que Mercedes los cargue el jueves.', 'Contenido orgánico general listo para cargar.', 'pendiente'),
+    it(['frank','jose'], 'Verificar que Brevo y Calendly están activos y con los datos correctos.', 'Herramientas de GDI activas.', 'proceso'),
   ]},
   { date:'2026-09-02', dow:'Mié', phase:'prep', items:[
     it(['andssuer','jason'], 'Entregar el primer set de piezas de pauta (Vuelo 1) a revisión.', 'Set de piezas entregado.'),
@@ -747,9 +782,14 @@ SCHEDULE.forEach(day => {
           const p = PEOPLE[id];
           return `<span class="who-tag" style="--who-color:${TEAMS[p.team].color}">${p.name}</span>`;
         }).join('');
-        return `<div class="item-row">
+        const st = statusInfo(row, day.date);
+        return `<div class="item-row ${st.cls}">
           <div class="who-tags">${tags}</div>
-          <div class="item-text"><div class="task">${row.task}</div><div class="deliv">Entregable: <b>${row.deliverable}</b></div></div>
+          <div class="item-text">
+            <label class="check-line"><input type="checkbox" disabled ${st.checked ? 'checked' : ''}><span class="task">${row.task}</span></label>
+            ${st.badge}
+            <div class="deliv">Entregable: <b>${row.deliverable}</b></div>
+          </div>
         </div>`;
       }).join('') +
     `</div>`;
@@ -802,13 +842,15 @@ function renderPersonView(){
   rows.forEach(r => {
     const dp = dParts(r.date);
     const others = r.who.filter(id => id !== activePerson).map(id => PEOPLE[id].name);
+    const st = statusInfo(r, r.date);
     const row = document.createElement('div');
-    row.className = 'p-row';
+    row.className = 'p-row item-row ' + st.cls;
     row.innerHTML = `
       <div class="d">${r.dow} ${dp.num} ${dp.mon}</div>
       <div>
         ${r.milestone ? `<div class="milestone-flag" style="margin-bottom:4px;">◆ ${r.milestone}</div>` : ''}
-        <div class="task">${r.task}</div>
+        <label class="check-line"><input type="checkbox" disabled ${st.checked ? 'checked' : ''}><span class="task">${r.task}</span></label>
+        ${st.badge}
         <div class="deliv">Entregable: <b>${r.deliverable}</b></div>
         ${others.length ? `<div class="deliv">Junto con: ${others.join(', ')}</div>` : ''}
       </div>`;

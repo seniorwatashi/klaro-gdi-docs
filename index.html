@@ -583,7 +583,7 @@ const TEAM_CARDS = [
 function it(who, task, deliverable, status){ return { who: Array.isArray(who) ? who : [who], task, deliverable, status: status || 'pendiente' }; }
 
 // Fecha de referencia para calcular retraso -- actualizar al hacer una nueva revisión día por día.
-const HOY = '2026-09-01';
+const HOY = '2026-09-02';
 function diasDeRetraso(dateStr){
   const d = new Date(dateStr + 'T00:00:00');
   const h = new Date(HOY + 'T00:00:00');
@@ -645,88 +645,88 @@ const SCHEDULE = [
     it('flow', 'Prueba interna del flujo WhatsApp → Calendly.', 'Flujo probado internamente.'),
     it(['frank','andssuer','jason'], 'Configurar técnicamente el envío de la secuencia de correos (Frank) y aplicarle una plantilla visual atractiva (Diseño), en conjunto.', 'Secuencia de correos configurada técnicamente y con plantilla visual lista.'),
   ]},
-  { date:'2026-09-03', dow:'Jue', phase:'prep', items:[
+  { date:'2026-09-04', dow:'Vie', phase:'prep', items:[
     it(['andssuer','jason'], 'Ajustar las piezas de pauta (Vuelo 1) según los comentarios de la revisión (ronda 1 de 2 incluidas).', 'Piezas ajustadas.'),
     it(['jose','rodrigo'], 'Ronda de aprobación de las piezas visadas por Fredy.', 'Piezas aprobadas o con comentarios.'),
     it('mercedes', 'Cargar las 15 publicaciones de contenido orgánico general (solo explican el servicio, sin links) para que las redes de GDI no arranquen vacías.', 'Contenido orgánico general cargado.'),
     it('frank', 'Cargar la secuencia de correos (ya configurada, con plantilla de Diseño) en el stack de tecnología.', 'Secuencia de correos activa en el stack.'),
     it('flow', 'Configurar recordatorios automáticos de Calendly por WhatsApp y notificación interna a GDI al agendar.', 'Recordatorios y notificaciones activos.'),
   ]},
-  { date:'2026-09-04', dow:'Vie', phase:'prep', items:[
+  { date:'2026-09-05', dow:'Sáb', phase:'prep', items:[
     it('fredy', 'Revisión creativa final de las piezas de pauta (Vuelo 1) antes de la aprobación de GDI.', 'Piezas finales visadas.'),
     it(['mercedes','flow','jose'], 'Prueba end-to-end completa del customer journey (Klaro, GDI y Flow juntos).', 'Journey verificado de punta a punta.'),
   ]},
-  { date:'2026-09-05', dow:'Sáb', phase:'prep', milestone:'Piezas y tecnología listas', items:[
+  { date:'2026-09-06', dow:'Dom', phase:'prep', milestone:'Piezas y tecnología listas', items:[
     it(['jose','rodrigo'], 'Aprobación final de las piezas de pauta (Vuelo 1) ajustadas.', 'Piezas aprobadas por GDI.'),
   ]},
-  { date:'2026-09-06', dow:'Dom', phase:'prep', offday:true, items:[] },
+  { date:'2026-09-07', dow:'Lun', phase:'prep', offday:true, items:[] },
 
   // ---------------- VUELO 1 ----------------
-  { date:'2026-09-07', dow:'Lun', phase:'vuelo1', milestone:'Lanzamiento de campaña', items:[
+  { date:'2026-09-08', dow:'Mar', phase:'vuelo1', milestone:'Lanzamiento de campaña', items:[
     it('mercedes', 'Activación gradual de las campañas en LinkedIn y Meta.', 'Campañas activas.'),
     it('jose', 'Agenda comercial de GDI lista para recibir videollamadas.', 'Agenda comercial operativa.'),
     it('flow', 'Verificación en vivo del flujo con tráfico real.', 'Flujo confirmado con tráfico real.'),
   ]},
-  { date:'2026-09-08', dow:'Mar', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-09', dow:'Mié', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-10', dow:'Jue', phase:'vuelo1', items: BASE_WEEKDAY() },
-  { date:'2026-09-11', dow:'Vie', phase:'vuelo1', items: WEEKLY_REPORT(1) },
-  { date:'2026-09-12', dow:'Sáb', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-11', dow:'Vie', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-12', dow:'Sáb', phase:'vuelo1', items: WEEKLY_REPORT(1) },
   { date:'2026-09-13', dow:'Dom', phase:'vuelo1', items: BASE_WEEKEND() },
-  { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items: BASE_WEEKEND() },
   { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items: BASE_WEEKDAY() },
-  { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [
+  { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: BASE_WEEKDAY() },
+  { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: [
     ...BASE_WEEKDAY(),
     it(['vladimir','mercedes','jose'], 'Sesión para planificar el contenido orgánico del Vuelo 2, con los aprendizajes de la primera semana de campaña (originalmente martes 15, movido por el feriado del 15/09 en Guatemala).', 'Plan de contenido orgánico del Vuelo 2 definido.'),
   ] },
-  { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: [...BASE_WEEKDAY(), it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.')] },
-  { date:'2026-09-18', dow:'Vie', phase:'vuelo1', items: [...WEEKLY_REPORT(2), it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.')] },
-  { date:'2026-09-19', dow:'Sáb', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-18', dow:'Vie', phase:'vuelo1', items: [...BASE_WEEKDAY(), it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.')] },
+  { date:'2026-09-19', dow:'Sáb', phase:'vuelo1', items: [...WEEKLY_REPORT(2), it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.')] },
   { date:'2026-09-20', dow:'Dom', phase:'vuelo1', items: BASE_WEEKEND() },
-  { date:'2026-09-21', dow:'Lun', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
+  { date:'2026-09-21', dow:'Lun', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-22', dow:'Mar', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
     it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Consolidar las métricas de los 15 días del Vuelo 1 (reporte corrida 1): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 1 entregado.'),
   ]},
 
   // ---------------- BUFFER + REVISIÓN + VUELO 2 ----------------
-  { date:'2026-09-22', dow:'Mar', phase:'vuelo2', items:[
+  { date:'2026-09-23', dow:'Mié', phase:'vuelo2', items:[
     it(['fredy','mercedes'], 'Preparar el análisis detallado de resultados del Vuelo 1 (reporte corrida 1) para presentarlo en la revisión intermedia.', 'Análisis del Vuelo 1 listo.'),
   ]},
-  { date:'2026-09-23', dow:'Mié', phase:'vuelo2', milestone:'Revisión intermedia', items:[
+  { date:'2026-09-24', dow:'Jue', phase:'vuelo2', milestone:'Revisión intermedia', items:[
     it('fredy', 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura.', 'Resultados presentados.'),
     it('vladimir', 'Coordinar la revisión intermedia con GDI y Aura.', 'Revisión intermedia realizada.'),
     it(['rodrigo','jose'], 'Revisar la calidad de los prospectos y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Ajustes del Vuelo 2 acordados.'),
   ]},
-  { date:'2026-09-24', dow:'Jue', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
+  { date:'2026-09-25', dow:'Vie', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
     it('mercedes', 'Aplicar los ajustes acordados y relanzar la campaña (día 1 del Vuelo 2), al menos 2 días después del cierre del Vuelo 1 para tener aprendizajes y ajustes claros.', 'Vuelo 2 activo con los ajustes aplicados.'),
   ]},
-  { date:'2026-09-25', dow:'Vie', phase:'vuelo2', items: WEEKLY_REPORT(3) },
-  { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(3) },
   { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
-  { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-09-29', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-09-30', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-01', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },
-  { date:'2026-10-02', dow:'Vie', phase:'vuelo2', items: WEEKLY_REPORT(4) },
-  { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-10-02', dow:'Vie', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(4) },
   { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
-  { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-10-06', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-07', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
-  { date:'2026-10-08', dow:'Jue', phase:'vuelo2', milestone:'Reporte corrida 2 (cierre Vuelo 2)', items:[
+  { date:'2026-10-08', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-09', dow:'Vie', phase:'vuelo2', milestone:'Reporte corrida 2 (cierre Vuelo 2)', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
     it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Consolidar las métricas finales del Vuelo 2 (reporte corrida 2): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 2 entregado.'),
   ]},
 
   // ---------------- CIERRE ----------------
-  { date:'2026-10-09', dow:'Vie', phase:'cierre', items:[
+  { date:'2026-10-10', dow:'Sáb', phase:'cierre', items:[
     it(['fredy','mariajose','vladimir'], 'Consolidar los resultados de ambos vuelos y preparar el informe final (aprendizajes y recomendaciones).', 'Borrador del informe final.'),
   ]},
-  { date:'2026-10-10', dow:'Sáb', phase:'cierre', offday:true, items:[] },
   { date:'2026-10-11', dow:'Dom', phase:'cierre', offday:true, items:[] },
-  { date:'2026-10-12', dow:'Lun', phase:'cierre', milestone:'Reporte final y cierre', items:[
+  { date:'2026-10-12', dow:'Lun', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-13', dow:'Mar', phase:'cierre', milestone:'Reporte final y cierre', items:[
     it(['fredy','vladimir'], 'Reunión de cierre con GDI y Aura: aprendizajes y recomendaciones.', 'Informe final entregado.'),
     it('jose', 'Liberar el pago final (40%).', 'Pago final liberado.'),
   ]},
@@ -863,17 +863,17 @@ renderPersonView();
 const MILESTONES = [
   { date:'2026-08-28', color:'var(--blue)',  title:'Firma de la orden de compra',
     crit:'José firma la aceptación formal antes de que venza la vigencia de la cotización — sin esto no se puede facturar ni arrancar el cronograma en firme.' },
-  { date:'2026-09-05', color:'var(--green)', title:'Revisión de piezas (aprobación final)',
+  { date:'2026-09-06', color:'var(--green)', title:'Revisión de piezas (aprobación final)',
     crit:'Las 8 imágenes, 2 carruseles, 2 videos, 15 posts orgánicos y la secuencia de correos quedan aprobados por Fredy y por José, dentro de las 2 rondas de ajuste incluidas.' },
-  { date:'2026-09-04', color:'var(--teal)',  title:'Configuración tecnológica completa',
+  { date:'2026-09-05', color:'var(--teal)',  title:'Configuración tecnológica completa',
     crit:'El customer journey completo (anuncio → formulario → WhatsApp → Flow → Calendly → notificación a GDI) funciona de punta a punta en la prueba end-to-end.' },
-  { date:'2026-09-07', color:'var(--blue)',  title:'Lanzamiento de campaña',
+  { date:'2026-09-08', color:'var(--blue)',  title:'Lanzamiento de campaña',
     crit:'Campañas activas en LinkedIn y Meta, con tráfico real fluyendo correctamente por todo el journey.' },
-  { date:'2026-09-21', color:'var(--gold)',  title:'Reporte corrida 1 (cierre Vuelo 1)',
+  { date:'2026-09-22', color:'var(--gold)',  title:'Reporte corrida 1 (cierre Vuelo 1)',
     crit:'Reporte completo y a tiempo con el costo de adquisición desglosado por canal y la calidad reportada por el equipo comercial. Sin meta numérica de volumen.' },
-  { date:'2026-10-08', color:'var(--gold)',  title:'Reporte corrida 2 (cierre Vuelo 2)',
+  { date:'2026-10-09', color:'var(--gold)',  title:'Reporte corrida 2 (cierre Vuelo 2)',
     crit:'Mismo criterio que la corrida 1, incorporando el efecto de los ajustes aplicados tras la revisión intermedia.' },
-  { date:'2026-10-12', color:'var(--violet)',title:'Reporte final y cierre',
+  { date:'2026-10-13', color:'var(--violet)',title:'Reporte final y cierre',
     crit:'Informe consolidado de ambos vuelos —costo de adquisición por canal, reacción del mercado al producto, aprendizajes y recomendaciones— entregado en la reunión de cierre.' },
 ];
 

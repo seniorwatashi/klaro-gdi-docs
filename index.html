@@ -135,12 +135,11 @@
   .day-date .num{font-family:"IBM Plex Mono"; font-size:20px; font-weight:600;}
   .day-date .mon{font-size:11px; color:var(--ink-muted);}
   .day-items{display:flex; flex-direction:column; gap:10px;}
-  .item-row{display:grid; grid-template-columns:170px 1fr; gap:12px; padding:6px 8px; border-left:3px solid transparent; border-radius:0 6px 6px 0;}
-  @media (max-width:640px){.item-row{grid-template-columns:1fr;} .day-card{grid-template-columns:1fr;}}
-  .item-row.status-orange{border-left-color:var(--orange); background:color-mix(in srgb, var(--orange) 8%, transparent);}
-  .item-row.status-red{border-left-color:var(--red); background:color-mix(in srgb, var(--red) 8%, transparent);}
-  .item-row.status-hecho{opacity:.55;}
-  .item-row.status-hecho .check-line .task{text-decoration:line-through;}
+  .item-row{display:grid; grid-template-columns:22px 170px 1fr; gap:10px; padding:6px 8px; align-items:start;}
+  @media (max-width:640px){.item-row{grid-template-columns:22px 1fr;} .item-row .who-tags{grid-column:2;} .item-row .item-text{grid-column:1 / -1;} .day-card{grid-template-columns:1fr;}}
+  .item-check{margin-top:2px; width:15px; height:15px; accent-color:var(--green);}
+  .item-row.status-orange .task{color:var(--orange); font-weight:700;}
+  .item-row.status-red .task{color:var(--red); font-weight:700;}
   .who-tags{display:flex; flex-wrap:wrap; gap:5px; align-content:flex-start;}
   .who-tag{
     display:inline-flex; align-items:center; gap:6px; height:fit-content;
@@ -148,8 +147,6 @@
     background:color-mix(in srgb, var(--who-color, var(--blue)) 16%, var(--surface));
     color:var(--who-color, var(--blue)); width:fit-content;
   }
-  .check-line{display:flex; align-items:flex-start; gap:7px; cursor:default;}
-  .check-line input[type=checkbox]{margin:3px 0 0; flex:none; width:14px; height:14px; accent-color:var(--green);}
   .item-text .task{font-size:13.8px;}
   .item-text .deliv{font-size:12.6px; color:var(--ink-muted); margin-top:3px;}
   .item-text .deliv b{color:var(--ink); font-weight:600;}
@@ -179,12 +176,14 @@
   .p-chip[aria-pressed="true"] .dot{background:#fff;}
   #person-view{display:flex; flex-direction:column; gap:10px;}
   .p-row{
-    display:grid; grid-template-columns:100px 1fr; gap:14px;
+    display:grid; grid-template-columns:22px 100px 1fr; gap:12px; align-items:start;
     padding:13px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);
   }
   .p-row .d{font-family:"IBM Plex Mono"; font-size:13px; color:var(--ink-muted); padding-top:1px;}
   .p-row .task{font-size:13.8px;}
   .p-row .deliv{font-size:12.4px; color:var(--ink-muted); margin-top:3px;}
+  .p-row.status-orange .task{color:var(--orange); font-weight:700;}
+  .p-row.status-red .task{color:var(--red); font-weight:700;}
   .empty-hint{color:var(--ink-muted); font-size:14px; padding:20px 4px;}
 
   /* ---------- Section 5: milestones ---------- */
@@ -387,7 +386,7 @@
     <div class="sec-head"><span class="num">3</span><h2>Calendario día a día</h2></div>
     <p class="sec-sub">Fuente de verdad de todo el plan: fecha, tarea, entregable y responsable. La sección 4 es esta misma información, filtrada por persona.</p>
     <div class="status-legend">
-      <span><input type="checkbox" checked disabled style="accent-color:var(--green)"> Hecho</span>
+      <span><input type="checkbox" checked style="accent-color:var(--green)"> Hecho</span>
       <span><span class="sw" style="background:var(--orange)"></span> 1 día de retraso</span>
       <span><span class="sw" style="background:var(--red)"></span> 2+ días de retraso</span>
       <span><span class="sw" style="background:var(--gold)"></span> En proceso</span>
@@ -784,9 +783,10 @@ SCHEDULE.forEach(day => {
         }).join('');
         const st = statusInfo(row, day.date);
         return `<div class="item-row ${st.cls}">
+          <input type="checkbox" class="item-check" ${st.checked ? 'checked' : ''}>
           <div class="who-tags">${tags}</div>
           <div class="item-text">
-            <label class="check-line"><input type="checkbox" disabled ${st.checked ? 'checked' : ''}><span class="task">${row.task}</span></label>
+            <div class="task">${row.task}</div>
             ${st.badge}
             <div class="deliv">Entregable: <b>${row.deliverable}</b></div>
           </div>
@@ -844,12 +844,13 @@ function renderPersonView(){
     const others = r.who.filter(id => id !== activePerson).map(id => PEOPLE[id].name);
     const st = statusInfo(r, r.date);
     const row = document.createElement('div');
-    row.className = 'p-row item-row ' + st.cls;
+    row.className = 'p-row ' + st.cls;
     row.innerHTML = `
+      <input type="checkbox" class="item-check" ${st.checked ? 'checked' : ''}>
       <div class="d">${r.dow} ${dp.num} ${dp.mon}</div>
       <div>
         ${r.milestone ? `<div class="milestone-flag" style="margin-bottom:4px;">◆ ${r.milestone}</div>` : ''}
-        <label class="check-line"><input type="checkbox" disabled ${st.checked ? 'checked' : ''}><span class="task">${r.task}</span></label>
+        <div class="task">${r.task}</div>
         ${st.badge}
         <div class="deliv">Entregable: <b>${r.deliverable}</b></div>
         ${others.length ? `<div class="deliv">Junto con: ${others.join(', ')}</div>` : ''}

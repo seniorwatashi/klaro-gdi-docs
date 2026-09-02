@@ -615,7 +615,7 @@ const SCHEDULE = [
   // ---------------- PREPARACIÓN ----------------
   { date:'2026-08-28', dow:'Vie', phase:'prep', milestone:'Firma de la orden de compra', items:[
     it('jose', 'Firmar la orden de compra, aceptar formalmente la propuesta, y procesar la factura inicial (anticipo 60%).', 'Orden de compra firmada y anticipo en proceso de pago.'),
-    it('majo', 'Enviar a GDI la orden de compra inicial y la facturación inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.'),
+    it('majo', 'Enviar a GDI la orden de compra inicial y la facturación inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.', 'hecho'),
     it(['majo','frank'], 'Pago inicial a Frank por los servicios de Flow.', 'Pago inicial a Frank realizado.'),
   ]},
   { date:'2026-08-29', dow:'Sáb', phase:'prep', offday:true, items:[] },
@@ -627,13 +627,12 @@ const SCHEDULE = [
     it(['jose','flow'], 'Comprar Brevo Starter y Calendly Teams (2 asientos) entre lunes y miércoles, y que Flow los conecte.', 'Brevo y Calendly contratados y conectados por Flow.', 'hecho'),
     it('flow', 'Configurar el agente de IA y la base de datos de campaña durante toda la semana.', 'Agente Flow en configuración.', 'proceso'),
     it(['mercedes','jose'], 'Planificar el contenido orgánico general: los puntos y temas importantes para explicar los servicios de GDI y los Fondos Líquidos al usuario, y armar una matriz de piezas para que Diseño las produzca.', 'Matriz de piezas de contenido orgánico lista para Diseño.', 'hecho'),
-    it(['majo','jose'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo y José.', 'Pago del anticipo coordinado.', 'pendiente'),
-    it(['majo','frank'], 'Enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción) y coordinar el anticipo.', 'Orden de pago a Frank enviada y anticipo coordinado.', 'pendiente'),
+    it(['majo','jose','frank'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo y José, y enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción).', 'Anticipo consolidado y orden de pago a Frank enviada.', 'pendiente'),
   ]},
   { date:'2026-09-01', dow:'Mar', phase:'prep', items:[
     it(['andssuer','jason'], 'Producción de las piezas de imagen y carruseles de pauta (Vuelo 1).', 'Avance de piezas.', 'pendiente'),
     it(['mercedes','jose','fredy','vladimir'], 'Configurar el formulario nativo (3 preguntas de calificación) y el correo automático de bienvenida — Mercedes ejecuta, con apoyo de José, guía de segmentación de Fredy, y coordinación de Vladimir.', 'Formulario + correo automático configurados.', 'hecho'),
-    it(['vladimir','jose'], 'Desarrollar la idea y el copy de la secuencia de correos de seguimiento, con apoyo de GDI.', 'Borrador de la secuencia de correos.', 'proceso'),
+    it(['vladimir','jose'], 'Desarrollar la idea y el copy de la secuencia de correos de seguimiento, con apoyo de GDI.', 'Borrador de la secuencia de correos.', 'hecho'),
     it(['fredy','vladimir','jose'], 'Sesión previa: revisar en conjunto el guion de la conversación de WhatsApp antes de que Flow lo construya.', 'Guion revisado en conjunto.', 'pendiente'),
     it(['andssuer','jason'], 'Producir los 15 posts de contenido orgánico general, según la matriz de piezas de Mercedes y José (explican el servicio, sin links), para que Mercedes los cargue el jueves.', 'Contenido orgánico general listo para cargar.', 'pendiente'),
     it(['frank','jose'], 'Verificar que Brevo y Calendly están activos y con los datos correctos.', 'Herramientas de GDI activas.', 'proceso'),

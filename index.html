@@ -679,9 +679,11 @@ const SCHEDULE = [
   { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items:[
     ...BASE_WEEKEND(),
     it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance sobre la documentación recibida; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
+    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [
     ...BASE_WEEKDAY(),
@@ -702,6 +704,7 @@ const SCHEDULE = [
     ...BASE_WEEKEND(),
     it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.'),
     it(['andssuer','jason'], 'Entregar el contenido de pauta del Vuelo 2 listo para cargar.', 'Piezas de pauta del Vuelo 2 entregadas.'),
+    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-22', dow:'Mar', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
@@ -725,7 +728,10 @@ const SCHEDULE = [
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
   ]},
   { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
-  { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items:[
+    ...BASE_WEEKEND(),
+    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
+  ]},
   { date:'2026-09-29', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-09-30', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-01', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },
@@ -735,7 +741,10 @@ const SCHEDULE = [
   ]},
   { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(4) },
   { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
-  { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },
+  { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items:[
+    ...BASE_WEEKEND(),
+    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
+  ]},
   { date:'2026-10-06', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-07', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-08', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },

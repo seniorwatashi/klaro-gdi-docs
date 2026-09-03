@@ -614,7 +614,7 @@ const WEEKLY_REPORT = (n) => [
 const SCHEDULE = [
   // ---------------- PREPARACIÓN ----------------
   { date:'2026-08-28', dow:'Vie', phase:'prep', milestone:'Firma de la orden de compra', items:[
-    it('jose', 'Firmar la orden de compra, aceptar formalmente la propuesta, y procesar la factura inicial (anticipo 60%).', 'Orden de compra firmada y anticipo en proceso de pago.'),
+    it('jose', 'Firmar la orden de compra, aceptar formalmente la propuesta, y procesar la factura inicial (anticipo 60%).', 'Orden de compra firmada y anticipo en proceso de pago.', 'hecho'),
     it('majo', 'Facturación inicial a GDI: enviar la orden de compra inicial y la factura inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.', 'hecho'),
     it(['majo','frank'], 'Pago inicial a Frank por los servicios de Flow.', 'Pago inicial a Frank realizado.', 'hecho'),
   ]},
@@ -623,11 +623,10 @@ const SCHEDULE = [
   { date:'2026-08-31', dow:'Lun', phase:'prep', items:[
     it(['andssuer','jason'], 'Brief y bocetos de las 8 piezas de imagen, 2 carruseles y 2 videos de pauta (Vuelo 1).', 'Bocetos listos para producción.', 'pendiente'),
     it('mercedes', 'Gestionar permisos de las cuentas de LinkedIn Ads y Meta Ads; crear la plataforma de medición.', 'Cuentas con permisos + panel de medición listo.', 'hecho'),
-    it(['jose','flow'], 'Confirmar los criterios finales de calificación de un lead (puesto, moneda Q/USD, monto a invertir — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000) y que Flow configure el bot con esa lógica de clasificación.', 'Criterios de calificación confirmados y aplicados en el bot.', 'pendiente'),
+    it(['jose','flow'], 'Confirmar los criterios finales de calificación de un lead (puesto, moneda Q/USD, monto a invertir — Nivel 1 desde Q25,000, Nivel 2 desde US$25,000) y que Flow configure el bot con esa lógica de clasificación.', 'Criterios de calificación confirmados y aplicados en el bot.', 'hecho'),
     it(['jose','flow'], 'Comprar Brevo Starter y Calendly Teams (2 asientos) entre lunes y miércoles, y que Flow los conecte.', 'Brevo y Calendly contratados y conectados por Flow.', 'hecho'),
     it('flow', 'Configurar el agente de IA y la base de datos de campaña durante toda la semana.', 'Agente Flow en configuración.', 'proceso'),
     it(['mercedes','jose'], 'Planificar el contenido orgánico general: los puntos y temas importantes para explicar los servicios de GDI y los Fondos Líquidos al usuario, y armar una matriz de piezas para que Diseño las produzca.', 'Matriz de piezas de contenido orgánico lista para Diseño.', 'hecho'),
-    it(['majo','jose','frank'], 'Coordinar el pago del anticipo de la campaña (60%) entre Majo y José, y enviar la orden de pago a Frank por los servicios de Flow (setup, tokens, suscripción).', 'Anticipo consolidado y orden de pago a Frank enviada.', 'pendiente'),
   ]},
   { date:'2026-09-01', dow:'Mar', phase:'prep', items:[
     it(['andssuer','jason'], 'Producción de las piezas de imagen y carruseles de pauta (Vuelo 1).', 'Avance de piezas.', 'pendiente'),

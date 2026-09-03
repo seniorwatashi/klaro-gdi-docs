@@ -681,11 +681,12 @@ const SCHEDULE = [
   { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
   ]},
-  { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [...BASE_WEEKDAY(), it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.')] },
-  { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: [
+  { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [
     ...BASE_WEEKDAY(),
     it(['vladimir','mercedes','jose','andssuer','rodrigo'], 'Sesión para planificar el contenido orgánico del Vuelo 2, con los aprendizajes de la primera semana de campaña.', 'Plan de contenido orgánico del Vuelo 2 definido.'),
+    it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.'),
   ] },
+  { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-18', dow:'Vie', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-19', dow:'Sáb', phase:'vuelo1', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
@@ -694,6 +695,7 @@ const SCHEDULE = [
   { date:'2026-09-21', dow:'Lun', phase:'vuelo1', items:[
     ...BASE_WEEKEND(),
     it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.'),
+    it(['andssuer','jason'], 'Entregar el contenido de pauta del Vuelo 2 listo para cargar.', 'Piezas de pauta del Vuelo 2 entregadas.'),
   ]},
   { date:'2026-09-22', dow:'Mar', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),

@@ -702,16 +702,16 @@ const SCHEDULE = [
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
     it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Consolidar las métricas de los 15 días del Vuelo 1 (reporte corrida 1): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 1 entregado.'),
+    it(['jose','fredy'], 'Presentar a GDI los artes del Vuelo 2, con una separación clara entre contenido orgánico y pautado.', 'Artes del Vuelo 2 presentados (orgánico y pautado diferenciados).'),
   ]},
 
   // ---------------- BUFFER + REVISIÓN + VUELO 2 ----------------
   { date:'2026-09-23', dow:'Mié', phase:'vuelo2', items:[
-    it(['fredy','mercedes'], 'Preparar el análisis detallado de resultados del Vuelo 1 (reporte corrida 1) para presentarlo en la revisión intermedia.', 'Análisis del Vuelo 1 listo.'),
+    it(['fredy','mercedes','vladimir'], 'Preparar el análisis detallado de resultados del Vuelo 1 (reporte corrida 1) para presentarlo en la revisión intermedia.', 'Análisis del Vuelo 1 listo.'),
+    it(['jason','fredy','andssuer'], 'Ajustar los artes del Vuelo 2 según los comentarios del cliente, separando claramente contenido orgánico y pautado.', 'Artes de contenido orgánico y pautado del Vuelo 2 ajustados.'),
   ]},
   { date:'2026-09-24', dow:'Jue', phase:'vuelo2', milestone:'Revisión intermedia', items:[
-    it('fredy', 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura.', 'Resultados presentados.'),
-    it('vladimir', 'Coordinar la revisión intermedia con GDI y Aura.', 'Revisión intermedia realizada.'),
-    it(['rodrigo','jose'], 'Revisar la calidad de los prospectos y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Ajustes del Vuelo 2 acordados.'),
+    it(['fredy','rodrigo','jose'], 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura, revisar la calidad de los prospectos, y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Resultados presentados y ajustes del Vuelo 2 acordados.'),
   ]},
   { date:'2026-09-25', dow:'Vie', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
     it('mercedes', 'Aplicar los ajustes acordados y relanzar la campaña (día 1 del Vuelo 2), al menos 2 días después del cierre del Vuelo 1 para tener aprendizajes y ajustes claros.', 'Vuelo 2 activo con los ajustes aplicados.'),

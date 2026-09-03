@@ -685,7 +685,6 @@ const SCHEDULE = [
   ]},
   { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items:[
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
-    it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: [
     ...BASE_WEEKDAY(),
@@ -706,6 +705,7 @@ const SCHEDULE = [
     ...BASE_WEEKEND(),
     it(['andssuer','jason'], 'Entregar el contenido orgánico del Vuelo 2 listo para cargar.', 'Piezas orgánicas del Vuelo 2 entregadas.'),
     it(['andssuer','jason'], 'Entregar el contenido de pauta del Vuelo 2 listo para cargar.', 'Piezas de pauta del Vuelo 2 entregadas.'),
+    it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance sobre la documentación recibida; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-22', dow:'Mar', phase:'vuelo1', milestone:'Reporte corrida 1 (cierre Vuelo 1)', items:[
@@ -732,6 +732,7 @@ const SCHEDULE = [
   { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items:[
     ...BASE_WEEKEND(),
+    it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance sobre la documentación recibida; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-09-29', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
@@ -741,7 +742,9 @@ const SCHEDULE = [
     ...BASE_WEEKDAY(),
     it('mercedes', 'Entregar el reporte semanal 3 (inversión, alcance, clics, conversiones, costo por prospecto) y ajustar segmentación/presupuesto.', 'Reporte semanal 3 entregado + ajustes aplicados.'),
   ]},
-  { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(4) },
+  { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items:[
+    it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+  ]},
   { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items:[
     ...BASE_WEEKEND(),

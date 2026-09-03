@@ -669,9 +669,14 @@ const SCHEDULE = [
   { date:'2026-09-09', dow:'Mié', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-10', dow:'Jue', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-11', dow:'Vie', phase:'vuelo1', items: BASE_WEEKDAY() },
-  { date:'2026-09-12', dow:'Sáb', phase:'vuelo1', items: WEEKLY_REPORT(1) },
+  { date:'2026-09-12', dow:'Sáb', phase:'vuelo1', items:[
+    it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+  ]},
   { date:'2026-09-13', dow:'Dom', phase:'vuelo1', items: BASE_WEEKEND() },
-  { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items: BASE_WEEKEND() },
+  { date:'2026-09-14', dow:'Lun', phase:'vuelo1', items:[
+    ...BASE_WEEKEND(),
+    it('mercedes', 'Entregar el reporte semanal 1 (inversión, alcance, clics, conversiones, costo por prospecto) y ajustar segmentación/presupuesto.', 'Reporte semanal 1 entregado + ajustes aplicados.'),
+  ]},
   { date:'2026-09-15', dow:'Mar', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-16', dow:'Mié', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: [

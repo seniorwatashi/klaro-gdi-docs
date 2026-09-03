@@ -748,6 +748,7 @@ const SCHEDULE = [
   { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items:[
     ...BASE_WEEKEND(),
+    it('jose', 'Atender las videollamadas agendadas; filtro preliminar de compliance sobre la documentación recibida; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Monitorear el panel de medición.', 'Métricas del día revisadas.'),
   ]},
   { date:'2026-10-06', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
@@ -760,12 +761,13 @@ const SCHEDULE = [
   ]},
 
   // ---------------- CIERRE ----------------
-  { date:'2026-10-10', dow:'Sáb', phase:'cierre', items:[
+  { date:'2026-10-10', dow:'Sáb', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-11', dow:'Dom', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-12', dow:'Lun', phase:'cierre', items:[
     it(['fredy','mariajose','vladimir'], 'Consolidar los resultados de ambos vuelos y preparar el informe final (aprendizajes y recomendaciones).', 'Borrador del informe final.'),
   ]},
-  { date:'2026-10-11', dow:'Dom', phase:'cierre', offday:true, items:[] },
-  { date:'2026-10-12', dow:'Lun', phase:'cierre', offday:true, items:[] },
-  { date:'2026-10-13', dow:'Mar', phase:'cierre', milestone:'Reporte final y cierre', items:[
+  { date:'2026-10-13', dow:'Mar', phase:'cierre', offday:true, items:[] },
+  { date:'2026-10-14', dow:'Mié', phase:'cierre', milestone:'Reporte final y cierre', items:[
     it(['fredy','vladimir'], 'Reunión de cierre con GDI y Aura: aprendizajes y recomendaciones.', 'Informe final entregado.'),
     it('jose', 'Liberar el pago final (40%).', 'Pago final liberado.'),
   ]},
@@ -912,7 +914,7 @@ const MILESTONES = [
     crit:'Reporte completo y a tiempo con el costo de adquisición desglosado por canal y la calidad reportada por el equipo comercial. Sin meta numérica de volumen.' },
   { date:'2026-10-09', color:'var(--gold)',  title:'Reporte corrida 2 (cierre Vuelo 2)',
     crit:'Mismo criterio que la corrida 1, incorporando el efecto de los ajustes aplicados tras la revisión intermedia.' },
-  { date:'2026-10-13', color:'var(--violet)',title:'Reporte final y cierre',
+  { date:'2026-10-14', color:'var(--violet)',title:'Reporte final y cierre',
     crit:'Informe consolidado de ambos vuelos —costo de adquisición por canal, reacción del mercado al producto, aprendizajes y recomendaciones— entregado en la reunión de cierre.' },
 ];
 

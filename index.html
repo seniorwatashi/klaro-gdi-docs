@@ -717,13 +717,18 @@ const SCHEDULE = [
   { date:'2026-09-25', dow:'Vie', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
     it('mercedes', 'Lanzamiento del segundo vuelo de campaña.', 'Vuelo 2 activo con los ajustes aplicados.'),
   ]},
-  { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(3) },
+  { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items:[
+    it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
+  ]},
   { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-09-28', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-09-29', dow:'Mar', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-09-30', dow:'Mié', phase:'vuelo2', items: BASE_WEEKDAY() },
   { date:'2026-10-01', dow:'Jue', phase:'vuelo2', items: BASE_WEEKDAY() },
-  { date:'2026-10-02', dow:'Vie', phase:'vuelo2', items: BASE_WEEKDAY() },
+  { date:'2026-10-02', dow:'Vie', phase:'vuelo2', items:[
+    ...BASE_WEEKDAY(),
+    it('mercedes', 'Entregar el reporte semanal 3 (inversión, alcance, clics, conversiones, costo por prospecto) y ajustar segmentación/presupuesto.', 'Reporte semanal 3 entregado + ajustes aplicados.'),
+  ]},
   { date:'2026-10-03', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(4) },
   { date:'2026-10-04', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },
   { date:'2026-10-05', dow:'Lun', phase:'vuelo2', items: BASE_WEEKEND() },

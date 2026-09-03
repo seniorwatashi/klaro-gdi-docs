@@ -643,23 +643,21 @@ const SCHEDULE = [
   ]},
   { date:'2026-09-03', dow:'Jue', phase:'prep', items:[
     it(['andssuer','jason'], 'Entregar el primer set de piezas de pauta (Vuelo 1) a revisión.', 'Set de piezas entregado.'),
+    it(['andssuer','jason'], 'Ajustar las piezas de pauta (Vuelo 1) según los comentarios de la revisión (ronda 1 de 2 incluidas).', 'Piezas ajustadas.'),
+    it('fredy', 'Revisión creativa final de las piezas de pauta (Vuelo 1) antes de la aprobación de GDI.', 'Piezas finales visadas.'),
   ]},
   { date:'2026-09-04', dow:'Vie', phase:'prep', items:[
     it(['fredy','vladimir','jose'], 'Sesión previa: revisar en conjunto el guion de la conversación de WhatsApp antes de que Flow lo construya (11am; reagendada del 02/09 por cancelación).', 'Guion revisado en conjunto.'),
-    it(['andssuer','jason'], 'Ajustar las piezas de pauta (Vuelo 1) según los comentarios de la revisión (ronda 1 de 2 incluidas).', 'Piezas ajustadas.'),
-    it(['jose','rodrigo'], 'Ronda de aprobación de las piezas visadas por Fredy.', 'Piezas aprobadas o con comentarios.'),
     it('mercedes', 'Cargar las 15 publicaciones de contenido orgánico general (solo explican el servicio, sin links) para que las redes de GDI no arranquen vacías.', 'Contenido orgánico general cargado.'),
     it('frank', 'Cargar la secuencia de correos (ya configurada, con plantilla de Diseño) en el stack de tecnología.', 'Secuencia de correos activa en el stack.'),
     it('flow', 'Configurar recordatorios automáticos de Calendly por WhatsApp y notificación interna a GDI al agendar.', 'Recordatorios y notificaciones activos.'),
   ]},
-  { date:'2026-09-05', dow:'Sáb', phase:'prep', items:[
-    it('fredy', 'Revisión creativa final de las piezas de pauta (Vuelo 1) antes de la aprobación de GDI.', 'Piezas finales visadas.'),
+  { date:'2026-09-05', dow:'Sáb', phase:'prep', offday:true, items:[] },
+  { date:'2026-09-06', dow:'Dom', phase:'prep', offday:true, items:[] },
+  { date:'2026-09-07', dow:'Lun', phase:'prep', milestone:'Piezas y tecnología listas', items:[
+    it(['jose','rodrigo'], 'Aprobación final de las piezas de pauta (Vuelo 1) ajustadas.', 'Piezas aprobadas por GDI.'),
     it(['mercedes','flow','jose'], 'Prueba end-to-end completa del customer journey (Klaro, GDI y Flow juntos).', 'Journey verificado de punta a punta.'),
   ]},
-  { date:'2026-09-06', dow:'Dom', phase:'prep', milestone:'Piezas y tecnología listas', items:[
-    it(['jose','rodrigo'], 'Aprobación final de las piezas de pauta (Vuelo 1) ajustadas.', 'Piezas aprobadas por GDI.'),
-  ]},
-  { date:'2026-09-07', dow:'Lun', phase:'prep', offday:true, items:[] },
 
   // ---------------- VUELO 1 ----------------
   { date:'2026-09-08', dow:'Mar', phase:'vuelo1', milestone:'Lanzamiento de campaña', items:[
@@ -863,9 +861,9 @@ renderPersonView();
 const MILESTONES = [
   { date:'2026-08-28', color:'var(--blue)',  title:'Firma de la orden de compra',
     crit:'José firma la aceptación formal antes de que venza la vigencia de la cotización — sin esto no se puede facturar ni arrancar el cronograma en firme.' },
-  { date:'2026-09-06', color:'var(--green)', title:'Revisión de piezas (aprobación final)',
+  { date:'2026-09-07', color:'var(--green)', title:'Revisión de piezas (aprobación final)',
     crit:'Las 8 imágenes, 2 carruseles, 2 videos, 15 posts orgánicos y la secuencia de correos quedan aprobados por Fredy y por José, dentro de las 2 rondas de ajuste incluidas.' },
-  { date:'2026-09-05', color:'var(--teal)',  title:'Configuración tecnológica completa',
+  { date:'2026-09-07', color:'var(--teal)',  title:'Configuración tecnológica completa',
     crit:'El customer journey completo (anuncio → formulario → WhatsApp → Flow → Calendly → notificación a GDI) funciona de punta a punta en la prueba end-to-end.' },
   { date:'2026-09-08', color:'var(--blue)',  title:'Lanzamiento de campaña',
     crit:'Campañas activas en LinkedIn y Meta, con tráfico real fluyendo correctamente por todo el journey.' },

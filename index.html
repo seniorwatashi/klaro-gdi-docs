@@ -685,6 +685,7 @@ const SCHEDULE = [
     ...BASE_WEEKDAY(),
     it(['vladimir','mercedes','jose','andssuer','rodrigo'], 'Sesión para planificar el contenido orgánico del Vuelo 2, con los aprendizajes de la primera semana de campaña.', 'Plan de contenido orgánico del Vuelo 2 definido.'),
     it(['andssuer','jason'], 'Producir el contenido orgánico del Vuelo 2, según lo planificado el 16/09.', 'Piezas orgánicas del Vuelo 2 en producción.'),
+    it(['andssuer','jason'], 'Producir el contenido pautado del Vuelo 2, según lo planificado el 16/09.', 'Piezas pautadas del Vuelo 2 en producción.'),
   ] },
   { date:'2026-09-17', dow:'Jue', phase:'vuelo1', items: BASE_WEEKDAY() },
   { date:'2026-09-18', dow:'Vie', phase:'vuelo1', items: BASE_WEEKDAY() },
@@ -702,19 +703,19 @@ const SCHEDULE = [
     it('flow', 'Gestionar las conversaciones de WhatsApp entrantes y agendar por Calendly.', 'Leads clasificados y agendados.'),
     it('jose', 'Atender las videollamadas agendadas; avanzar documentos y firma/recepción de fondos.', 'Leads procesados por el embudo interno de GDI.'),
     it('mercedes', 'Consolidar las métricas de los 15 días del Vuelo 1 (reporte corrida 1): costo por prospecto y calidad reportada, por canal.', 'Reporte corrida 1 entregado.'),
-    it(['jose','fredy'], 'Presentar a GDI los artes del Vuelo 2, con una separación clara entre contenido orgánico y pautado.', 'Artes del Vuelo 2 presentados (orgánico y pautado diferenciados).'),
+    it(['jose','fredy'], 'Presentar a GDI los artes orgánicos y de pauta para el Vuelo 2.', 'Artes del Vuelo 2 presentados (orgánico y pautado diferenciados).'),
   ]},
 
   // ---------------- BUFFER + REVISIÓN + VUELO 2 ----------------
   { date:'2026-09-23', dow:'Mié', phase:'vuelo2', items:[
     it(['fredy','mercedes','vladimir'], 'Preparar el análisis detallado de resultados del Vuelo 1 (reporte corrida 1) para presentarlo en la revisión intermedia.', 'Análisis del Vuelo 1 listo.'),
-    it(['jason','fredy','andssuer'], 'Ajustar los artes del Vuelo 2 según los comentarios del cliente, separando claramente contenido orgánico y pautado.', 'Artes de contenido orgánico y pautado del Vuelo 2 ajustados.'),
+    it(['jason','fredy','andssuer'], 'Ajustar los artes orgánicos y pautados del Vuelo 2, según resultados de la reunión del 22/09.', 'Artes de contenido orgánico y pautado del Vuelo 2 ajustados.'),
   ]},
   { date:'2026-09-24', dow:'Jue', phase:'vuelo2', milestone:'Revisión intermedia', items:[
-    it(['fredy','rodrigo','jose'], 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura, revisar la calidad de los prospectos, y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Resultados presentados y ajustes del Vuelo 2 acordados.'),
+    it(['fredy','rodrigo','jose','mercedes','vladimir'], 'Presentar los resultados preliminares del Vuelo 1 a GDI y Aura, revisar la calidad de los prospectos, y aprobar los ajustes de mensajes/audiencias/presupuesto para el Vuelo 2.', 'Resultados presentados y ajustes del Vuelo 2 acordados.'),
   ]},
   { date:'2026-09-25', dow:'Vie', phase:'vuelo2', milestone:'Lanzamiento Vuelo 2', items:[
-    it('mercedes', 'Aplicar los ajustes acordados y relanzar la campaña (día 1 del Vuelo 2), al menos 2 días después del cierre del Vuelo 1 para tener aprendizajes y ajustes claros.', 'Vuelo 2 activo con los ajustes aplicados.'),
+    it('mercedes', 'Lanzamiento del segundo vuelo de campaña.', 'Vuelo 2 activo con los ajustes aplicados.'),
   ]},
   { date:'2026-09-26', dow:'Sáb', phase:'vuelo2', items: WEEKLY_REPORT(3) },
   { date:'2026-09-27', dow:'Dom', phase:'vuelo2', items: BASE_WEEKEND() },

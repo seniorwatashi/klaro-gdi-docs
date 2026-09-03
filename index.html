@@ -615,8 +615,8 @@ const SCHEDULE = [
   // ---------------- PREPARACIÓN ----------------
   { date:'2026-08-28', dow:'Vie', phase:'prep', milestone:'Firma de la orden de compra', items:[
     it('jose', 'Firmar la orden de compra, aceptar formalmente la propuesta, y procesar la factura inicial (anticipo 60%).', 'Orden de compra firmada y anticipo en proceso de pago.'),
-    it('majo', 'Enviar a GDI la orden de compra inicial y la facturación inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.', 'hecho'),
-    it(['majo','frank'], 'Pago inicial a Frank por los servicios de Flow.', 'Pago inicial a Frank realizado.'),
+    it('majo', 'Facturación inicial a GDI: enviar la orden de compra inicial y la factura inicial (anticipo 60%).', 'Orden de compra y factura inicial enviadas.', 'hecho'),
+    it(['majo','frank'], 'Pago inicial a Frank por los servicios de Flow.', 'Pago inicial a Frank realizado.', 'hecho'),
   ]},
   { date:'2026-08-29', dow:'Sáb', phase:'prep', offday:true, items:[] },
   { date:'2026-08-30', dow:'Dom', phase:'prep', offday:true, items:[] },
